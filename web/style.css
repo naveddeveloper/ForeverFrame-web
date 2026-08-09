@@ -1,0 +1,4243 @@
+﻿/* =========================================================
+   ROOT
+========================================================= */
+
+:root {
+    --scroll-progress: 0;
+    --mouse-x: 0;
+    --mouse-y: 0;
+    --paper: #faf7f0;
+    --black: #171512;
+}
+
+/* =========================================================
+   INTRO VIDEO
+   Plays before the wedding invitation
+   ========================================================= */
+
+#intro-video {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100svh;
+    z-index: 999999;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1), visibility 1.1s ease;
+}
+
+
+    /* ---------------------------------------------------------
+   VIDEO
+   --------------------------------------------------------- */
+
+    #intro-video video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+        background: #000;
+    }
+
+
+/* ---------------------------------------------------------
+   SKIP BUTTON
+   --------------------------------------------------------- */
+
+#skipIntro {
+    position: absolute;
+    z-index: 5;
+    right: 28px;
+    bottom: 28px;
+    padding: 11px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.30);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    cursor: pointer;
+    opacity: 0.85;
+    transition: background 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
+}
+
+
+    #skipIntro:hover {
+        background: rgba(255, 255, 255, 0.24);
+        opacity: 1;
+        transform: translateY(-2px);
+    }
+
+
+/* ---------------------------------------------------------
+   INTRO FINISHED
+   --------------------------------------------------------- */
+
+#intro-video.intro-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/* ---------------------------------------------------------
+   OPTIONAL: PREVENT SCROLL WHILE INTRO IS PLAYING
+   --------------------------------------------------------- */
+
+html.intro-active,
+body.intro-active {
+    overflow: hidden;
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 700px) {
+
+    #intro-video {
+        height: 100svh;
+    }
+
+        #intro-video video {
+            object-fit: cover;
+        }
+
+    #skipIntro {
+        right: 18px;
+        bottom: 18px;
+        padding: 10px 15px;
+        font-size: 11px;
+    }
+}
+
+#startIntro {
+    padding: 15px 28px;
+    border: 1px solid rgba(255,255,255,0.45);
+    border-radius: 999px;
+    background: rgba(255,255,255,0.12);
+    color: white;
+    backdrop-filter: blur(12px);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.4s ease, background 0.4s ease;
+}
+
+
+    #startIntro:hover {
+        transform: translateY(-3px);
+        background: rgba(255,255,255,0.22);
+    }
+
+
+.intro-button-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ---------------------------------------------------------
+   REDUCED MOTION
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    #intro-video {
+        transition: opacity 0.4s ease;
+    }
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+html {
+    margin: 0;
+    padding: 0;
+    background: var(--paper);
+    scroll-behavior: auto;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #faf7f0;
+    color: #171512;
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   WEBGL
+========================================================= */
+
+#webgl {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+}
+
+
+/* =========================================================
+   SITE
+========================================================= */
+
+#site {
+    position: relative;
+    z-index: 1;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100svh;
+    min-height: 650px;
+    overflow: hidden;
+    background: #faf7f0;
+}
+
+
+/* =========================================================
+   HERO IMAGE
+========================================================= */
+
+.hero-image-wrap {
+    position: absolute;
+    inset: 12px;
+    overflow: hidden;
+    border-radius: 14px;
+}
+
+body,
+.hero,
+.phase2-placeholder {
+    background: #faf7f0;
+}
+
+
+.hero-image {
+    position: absolute;
+    inset: -4%;
+    width: 108%;
+    height: 108%;
+    object-fit: cover;
+    object-position: center center;
+    transform: translate3d( calc( var(--mouse-x) * -12px ), calc( var(--mouse-y) * -12px ), 0 ) scale( calc( 1.02 + var(--scroll-progress) * 0.08 ) );
+    transform-origin: center center;
+    will-change: transform;
+}
+
+
+/* =========================================================
+   HERO OVERLAY
+========================================================= */
+
+.hero-overlay {
+    position: absolute;
+    inset: 12px;
+    z-index: 2;
+    border-radius: 14px;
+    pointer-events: none;
+    background: linear-gradient( to bottom, rgba(30, 40, 45, 0.08), rgba(30, 40, 45, 0.00) 35%, rgba(0, 0, 0, 0.08) 75%, rgba(0, 0, 0, 0.18) );
+}
+
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
+
+.hero-content {
+    position: absolute;
+    z-index: 10;
+    top: 8%;
+    left: 50%;
+    width: min( 1000px, 90vw );
+    transform: translateX(-50%) translateY( calc( var(--scroll-progress) * -35px ) );
+    text-align: center;
+    color: white;
+}
+
+
+.hero-eyebrow {
+    margin: 0 0 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.20);
+    opacity: 0.82;
+}
+
+
+.hero-title {
+    margin: 0;
+    font-family: "Times New Roman", Times, serif;
+    font-size: clamp( 65px, 8.8vw, 145px );
+    line-height: 0.82;
+    font-weight: 400;
+    letter-spacing: -0.065em;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.18);
+}
+
+
+.hero-subtitle {
+    margin: 22px 0 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0.78;
+}
+
+
+/* =========================================================
+   SCROLL BUTTON
+========================================================= */
+
+.scroll-button {
+    position: absolute;
+    z-index: 20;
+    left: 50%;
+    bottom: 7%;
+    min-width: 158px;
+    padding: 13px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transform: translateX(-50%) translateY( calc( var(--scroll-progress) * 50px ) );
+    border: 0;
+    border-radius: 10px;
+    background: rgba( 255, 255, 255, 0.96 );
+    color: #202020;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba( 0, 0, 0, 0.16 );
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+
+    .scroll-button:hover {
+        transform: translateX(-50%) translateY(-3px);
+        box-shadow: 0 12px 40px rgba( 0, 0, 0, 0.22 );
+    }
+
+
+.scroll-arrow {
+    font-size: 18px;
+    line-height: 0.7;
+}
+
+
+/* =========================================================
+   MUTE BUTTON
+========================================================= */
+
+.mute-button {
+    position: absolute;
+    z-index: 30;
+    top: 25px;
+    right: 25px;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 50%;
+    background: rgba( 245, 245, 245, 0.28 );
+    color: white;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba( 0, 0, 0, 0.08 );
+}
+
+
+.mute-icon {
+    font-size: 16px;
+    opacity: 0.85;
+}
+
+
+/* =========================================================
+   PETALS
+========================================================= */
+
+.petal {
+    position: absolute;
+    z-index: 15;
+    width: 100px;
+    height: 58px;
+    border-radius: 80% 15% 80% 15%;
+    background: linear-gradient( 135deg, rgba(255,255,255,0.95), rgba(232,229,220,0.84) );
+    box-shadow: inset 7px 5px 15px rgba( 255, 255, 255, 0.85 ), inset -5px -5px 15px rgba( 110, 100, 90, 0.10 ), 0 7px 25px rgba( 0, 0, 0, 0.10 );
+    opacity: 0.92;
+    pointer-events: none;
+    will-change: transform;
+}
+
+
+/* ---------------------------------------------------------
+   PETAL 1
+--------------------------------------------------------- */
+
+.petal-1 {
+    top: 2%;
+    left: 11%;
+    transform: rotate( 125deg ) scale( 0.92 );
+    animation: petalFloat1 7s ease-in-out infinite;
+}
+
+
+/* ---------------------------------------------------------
+   PETAL 2
+--------------------------------------------------------- */
+
+.petal-2 {
+    top: 3%;
+    right: 25%;
+    transform: rotate( 35deg ) scale( 0.72 );
+    animation: petalFloat2 9s ease-in-out infinite;
+}
+
+
+/* ---------------------------------------------------------
+   PETAL 3
+--------------------------------------------------------- */
+
+.petal-3 {
+    top: 28%;
+    left: 5%;
+    transform: rotate( 20deg ) scale( 1.15 );
+    animation: petalFloat3 8s ease-in-out infinite;
+}
+
+
+/* ---------------------------------------------------------
+   PETAL 4
+--------------------------------------------------------- */
+
+.petal-4 {
+    top: 24%;
+    right: 7%;
+    transform: rotate( -35deg ) scale( 1.10 );
+    animation: petalFloat4 10s ease-in-out infinite;
+}
+
+
+/* ---------------------------------------------------------
+   PETAL 5
+--------------------------------------------------------- */
+
+.petal-5 {
+    top: 54%;
+    left: 1%;
+    transform: rotate( 65deg ) scale( 0.55 );
+    animation: petalFloat5 8s ease-in-out infinite;
+}
+
+
+/* ---------------------------------------------------------
+   PETAL 6
+--------------------------------------------------------- */
+
+.petal-6 {
+    bottom: 10%;
+    right: 12%;
+    transform: rotate( -10deg ) scale( 0.55 );
+    animation: petalFloat6 9s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   PETAL ANIMATIONS
+========================================================= */
+
+@keyframes petalFloat1 {
+
+    0%, 100% {
+        margin-top: 0;
+    }
+
+    50% {
+        margin-top: 22px;
+    }
+}
+
+
+@keyframes petalFloat2 {
+
+    0%, 100% {
+        margin-top: 0;
+    }
+
+    50% {
+        margin-top: -18px;
+    }
+}
+
+
+@keyframes petalFloat3 {
+
+    0%, 100% {
+        margin-left: 0;
+    }
+
+    50% {
+        margin-left: 20px;
+    }
+}
+
+
+@keyframes petalFloat4 {
+
+    0%, 100% {
+        margin-top: 0;
+    }
+
+    50% {
+        margin-top: 25px;
+    }
+}
+
+
+@keyframes petalFloat5 {
+
+    0%, 100% {
+        margin-left: 0;
+    }
+
+    50% {
+        margin-left: 15px;
+    }
+}
+
+
+@keyframes petalFloat6 {
+
+    0%, 100% {
+        margin-top: 0;
+    }
+
+    50% {
+        margin-top: -20px;
+    }
+}
+
+
+/* =========================================================
+   BOTTOM LABELS
+========================================================= */
+
+.hero-bottom-left,
+.hero-bottom-right {
+    position: absolute;
+    z-index: 20;
+    bottom: 25px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 12px rgba( 0, 0, 0, 0.25 );
+}
+
+
+.hero-bottom-left {
+    left: 30px;
+}
+
+
+.hero-bottom-right {
+    right: 30px;
+}
+
+
+/* =========================================================
+   PHASE 2 PLACEHOLDER
+========================================================= */
+
+.phase2-placeholder {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--paper);
+    color: #cfc6b8;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .hero {
+        min-height: 620px;
+    }
+
+
+    .hero-image-wrap {
+        inset: 8px;
+        border-radius: 11px;
+    }
+
+
+    .hero-overlay {
+        inset: 8px;
+        border-radius: 11px;
+    }
+
+
+    .hero-content {
+        top: 10%;
+    }
+
+
+    .hero-eyebrow {
+        font-size: 12px;
+    }
+
+
+    .hero-title {
+        font-size: clamp( 52px, 15vw, 90px );
+    }
+
+
+    .hero-subtitle {
+        font-size: 8px;
+        letter-spacing: 3px;
+    }
+
+
+    .petal {
+        width: 65px;
+        height: 38px;
+    }
+
+
+    .petal-3 {
+        left: -10px;
+    }
+
+
+    .petal-4 {
+        right: -10px;
+    }
+
+
+    .mute-button {
+        top: 18px;
+        right: 18px;
+        width: 38px;
+        height: 38px;
+    }
+
+
+    .scroll-button {
+        bottom: 7%;
+        min-width: 145px;
+        padding: 12px 15px;
+        font-size: 12px;
+    }
+
+
+    .hero-bottom-left,
+    .hero-bottom-right {
+        bottom: 18px;
+        font-size: 8px;
+    }
+
+
+    .hero-bottom-left {
+        left: 18px;
+    }
+
+
+    .hero-bottom-right {
+        right: 18px;
+    }
+}
+
+
+/* =========================================================
+   PHASE 2
+   Wedding Invitation Reveal
+   ========================================================= */
+
+.phase2 {
+    position: relative;
+    width: 100%;
+    min-height: 100svh;
+    background: #faf7f0;
+    color: #11100e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 110px 24px 120px;
+}
+
+
+/* =========================================================
+   TOP TEXT
+   ========================================================= */
+
+.phase2-intro {
+    width: min(900px, 100%);
+    text-align: center;
+    margin: 0 auto;
+}
+
+
+    .phase2-intro h2 {
+        margin: 0;
+        font-family: "Times New Roman", Times, serif;
+        font-size: clamp( 42px, 5vw, 68px );
+        font-weight: 400;
+        line-height: 1.06;
+        letter-spacing: -0.045em;
+        color: #11100e;
+    }
+
+
+.phase2-intro-line {
+    display: block;
+}
+
+
+/* =========================================================
+   SCRATCH AREA
+   ========================================================= */
+
+.phase2-reveal-area {
+    width: min(620px, 100%);
+    margin-top: 105px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* =========================================================
+   SCRATCH LABEL
+   ========================================================= */
+
+.phase2-label {
+    margin-bottom: 28px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba( 30, 28, 24, 0.58 );
+    letter-spacing: 0.01em;
+}
+
+
+/* =========================================================
+   SCRATCH CARD
+   ========================================================= */
+
+.scratch-card {
+    position: relative;
+    width: min( 505px, 90vw );
+    aspect-ratio: 1.55 / 1;
+    border-radius: 15px;
+    overflow: hidden;
+    background: linear-gradient( 135deg, #9f681c 0%, #d99c32 18%, #f2c861 38%, #c58a28 57%, #f7d56f 73%, #b87920 100% );
+    box-shadow: 0 12px 28px rgba( 60, 45, 20, 0.16 );
+    cursor: crosshair;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+}
+
+
+    /* =========================================================
+   GOLD TEXTURE
+   ========================================================= */
+
+    .scratch-card::before {
+        content: "";
+        position: absolute;
+        inset: -30%;
+        background: radial-gradient( ellipse at 20% 20%, rgba(255,255,255,0.30), transparent 28% ), radial-gradient( ellipse at 80% 30%, rgba(255,245,190,0.45), transparent 32% ), radial-gradient( ellipse at 50% 80%, rgba(120,70,10,0.20), transparent 35% );
+        filter: blur(15px);
+        pointer-events: none;
+    }
+
+
+    /* =========================================================
+   GOLD TEXTURE LINES
+   ========================================================= */
+
+    .scratch-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0.32;
+        background-image: repeating-linear-gradient( 8deg, rgba(255,255,255,0.08) 0px, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 5px ), repeating-linear-gradient( 92deg, rgba(80,45,10,0.08) 0px, rgba(80,45,10,0.08) 1px, transparent 1px, transparent 7px );
+        mix-blend-mode: overlay;
+        pointer-events: none;
+    }
+
+
+/* =========================================================
+   REVEALED CONTENT
+   ========================================================= */
+
+.scratch-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+    box-sizing: border-box;
+    background: #f8f2e8;
+    opacity: 0;
+    transition: opacity 700ms cubic-bezier( 0.22, 1, 0.36, 1 );
+    pointer-events: none;
+}
+
+
+.scratch-card.revealed
+.scratch-content {
+    opacity: 1;
+}
+
+
+.scratch-content-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+
+.scratch-small {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba( 20, 18, 15, 0.52 );
+}
+
+
+.scratch-names {
+    font-family: "Times New Roman", Times, serif;
+    font-size: clamp( 34px, 6vw, 54px );
+    font-weight: 400;
+    line-height: 1;
+    color: #15120f;
+}
+
+
+.scratch-date {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: rgba( 20, 18, 15, 0.58 );
+}
+
+
+/* =========================================================
+   SCRATCH CANVAS
+   ========================================================= */
+
+#scratchCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    display: block;
+    touch-action: none;
+}
+
+
+/* =========================================================
+   REVEAL HINT
+   ========================================================= */
+
+.scratch-hint {
+    margin-top: 22px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: rgba( 30, 28, 24, 0.42 );
+    transition: opacity 400ms ease;
+}
+
+
+.scratch-card.revealed ~ .scratch-hint {
+    opacity: 0;
+}
+
+
+/* =========================================================
+   PHASE 2 DECORATION
+   ========================================================= */
+
+.phase2-decoration {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.35;
+}
+
+
+    .phase2-decoration.left {
+        width: 180px;
+        height: 180px;
+        left: -100px;
+        top: 38%;
+        border-radius: 50%;
+        background: radial-gradient( circle, rgba( 211, 183, 135, 0.22 ), transparent 70% );
+    }
+
+
+    .phase2-decoration.right {
+        width: 220px;
+        height: 220px;
+        right: -120px;
+        bottom: 12%;
+        border-radius: 50%;
+        background: radial-gradient( circle, rgba( 211, 183, 135, 0.18 ), transparent 70% );
+    }
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .phase2 {
+        min-height: 85svh;
+        padding: 90px 18px 100px;
+    }
+
+
+    .phase2-intro h2 {
+        font-size: clamp( 34px, 9vw, 50px );
+        line-height: 1.08;
+    }
+
+
+    .phase2-reveal-area {
+        margin-top: 75px;
+    }
+
+
+    .phase2-label {
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+
+
+    .scratch-card {
+        width: 92vw;
+        border-radius: 13px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media ( prefers-reduced-motion: reduce ) {
+
+    .scratch-content {
+        transition: none;
+    }
+}
+
+
+/* =========================================================
+   PHASE 3
+   WEDDING VENUE
+   ========================================================= */
+
+.phase3 {
+    position: relative;
+    width: 100%;
+    min-height: 100svh;
+    box-sizing: border-box;
+    background: #faf7f0;
+    color: #11100e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    padding: 18px 24px 90px;
+}
+
+
+/* =========================================================
+   TOP LABEL
+   ========================================================= */
+
+.phase3-label {
+    margin-top: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+    color: rgba( 194, 158, 120, 0.55 );
+    text-align: center;
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 900ms ease, transform 900ms cubic-bezier( 0.22, 1, 0.36, 1 );
+}
+
+
+/* =========================================================
+   MAIN HEADING
+   ========================================================= */
+
+.phase3-title {
+    width: min( 850px, 100% );
+    margin: 42px auto 0;
+    text-align: center;
+    font-family: "Times New Roman", Times, serif;
+    font-size: clamp( 48px, 6vw, 78px );
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.055em;
+    color: #0f0e0c;
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 1100ms ease 120ms, transform 1100ms cubic-bezier( 0.22, 1, 0.36, 1 );
+}
+
+
+    .phase3-title span {
+        display: block;
+    }
+
+
+/* =========================================================
+   VENUE ART AREA
+   ========================================================= */
+
+.phase3-art {
+    position: relative;
+    width: min( 900px, 94vw );
+    height: clamp( 430px, 48vw, 590px );
+    margin-top: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(60px) scale(0.96);
+    transition: opacity 1400ms ease 280ms, transform 1400ms cubic-bezier( 0.22, 1, 0.36, 1 );
+}
+
+
+    /* =========================================================
+   SOFT LIGHT BEHIND IMAGE
+   ========================================================= */
+
+    .phase3-art::before {
+        content: "";
+        position: absolute;
+        width: min( 700px, 80vw );
+        height: 420px;
+        left: 50%;
+        top: 50%;
+        transform: translate( -50%, -50% );
+        background: radial-gradient( ellipse, rgba( 255, 255, 248, 0.90 ) 0%, rgba( 255, 255, 248, 0.45 ) 38%, rgba( 250, 247, 240, 0 ) 75% );
+        filter: blur(12px);
+        pointer-events: none;
+    }
+
+
+/* =========================================================
+   WATERCOLOUR IMAGE
+   ========================================================= */
+
+.phase3-image {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: min( 850px, 92vw );
+    max-height: 570px;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    user-select: none;
+    -webkit-user-drag: none;
+    filter: saturate(0.82) contrast(0.92) brightness(1.04);
+    transform: translate3d( 0, 0, 0 );
+    will-change: transform;
+}
+
+
+/* =========================================================
+   VENUE INFORMATION
+   ========================================================= */
+
+.phase3-venue {
+    position: relative;
+    z-index: 3;
+    margin-top: -22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 1000ms ease 600ms, transform 1000ms cubic-bezier( 0.22, 1, 0.36, 1 );
+}
+
+
+/* =========================================================
+   INVITATION TO
+   ========================================================= */
+
+.phase3-invitation {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: rgba( 194, 158, 120, 0.70 );
+    margin-bottom: 15px;
+}
+
+
+/* =========================================================
+   VENUE NAME
+   ========================================================= */
+
+.phase3-venue-name {
+    font-family: "Brush Script MT", "Segoe Script", cursive;
+    font-size: clamp( 32px, 4vw, 48px );
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1;
+    color: #181512;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   SCROLL REVEAL ACTIVE STATE
+   ========================================================= */
+
+.phase3.is-visible
+.phase3-label {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+.phase3.is-visible
+.phase3-title {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+.phase3.is-visible
+.phase3-art {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+
+.phase3.is-visible
+.phase3-venue {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   IMAGE FLOAT
+   ========================================================= */
+
+.phase3.is-visible
+.phase3-image {
+    animation: phase3Float 7s ease-in-out infinite;
+}
+
+
+@keyframes phase3Float {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   DESKTOP SPACING
+   ========================================================= */
+
+@media (min-width: 1000px) {
+
+    .phase3 {
+        padding-top: 20px;
+        padding-bottom: 120px;
+    }
+
+
+    .phase3-art {
+        margin-top: 20px;
+        height: 600px;
+    }
+
+
+    .phase3-venue {
+        margin-top: -55px;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media ( min-width: 701px ) and ( max-width: 999px ) {
+
+    .phase3 {
+        padding-top: 20px;
+    }
+
+
+    .phase3-art {
+        height: 520px;
+        margin-top: 35px;
+    }
+
+
+    .phase3-venue {
+        margin-top: -35px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .phase3 {
+        min-height: 80svh;
+        padding: 18px 16px 90px;
+    }
+
+
+    .phase3-label {
+        font-size: 13px;
+    }
+
+
+    .phase3-title {
+        margin-top: 34px;
+        font-size: clamp( 39px, 10vw, 55px );
+        line-height: 1.07;
+    }
+
+
+    .phase3-art {
+        width: 100%;
+        height: 390px;
+        margin-top: 35px;
+    }
+
+
+    .phase3-image {
+        width: 105vw;
+        max-width: none;
+    }
+
+
+    .phase3-venue {
+        margin-top: -8px;
+    }
+
+
+    .phase3-invitation {
+        font-size: 11px;
+        letter-spacing: 0.28em;
+    }
+
+
+    .phase3-venue-name {
+        font-size: 31px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .phase3-title {
+        font-size: 36px;
+    }
+
+
+    .phase3-art {
+        height: 330px;
+    }
+
+
+    .phase3-venue-name {
+        font-size: 28px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media ( prefers-reduced-motion: reduce ) {
+
+    .phase3-label,
+    .phase3-title,
+    .phase3-art,
+    .phase3-venue {
+        transition: none;
+        transform: none;
+        opacity: 1;
+    }
+
+
+    .phase3-image {
+        animation: none;
+    }
+}
+
+/* =========================================================
+   PHASE 4
+   PINNED SCROLL-DRIVEN HORIZONTAL STORY TIMELINE
+   ========================================================= */
+
+
+/* =========================================================
+   SECTION
+   ========================================================= */
+
+#phase4 {
+    position: relative;
+    width: 100%;
+    /*
+     * Vertical scroll space.
+     *
+     * Section pinned rahega aur
+     * isi space ke andar horizontal
+     * animation chalegi.
+     */
+
+    height: 270vh;
+    background: #fbf8f1;
+    color: #111;
+    overflow: clip;
+}
+
+
+    /* =========================================================
+   PINNED VIEW
+   ========================================================= */
+
+    #phase4 .phase4-pin {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        min-height: 700px;
+        overflow: hidden;
+        background: #fbf8f1;
+    }
+
+
+    /* =========================================================
+   HEADING
+   ========================================================= */
+
+    #phase4 .phase4-heading {
+        position: absolute;
+        top: 7.5vh;
+        left: 0;
+        width: 100%;
+        z-index: 20;
+        text-align: center;
+        pointer-events: none;
+    }
+
+
+        #phase4 .phase4-heading h2 {
+            margin: 0;
+            font-family: "Times New Roman", Times, serif;
+            font-size: clamp( 50px, 4.5vw, 68px );
+            font-weight: 400;
+            line-height: 0.95;
+            letter-spacing: -0.055em;
+            color: #111;
+        }
+
+
+    /* =========================================================
+   VIEWPORT
+   ========================================================= */
+
+    #phase4 .phase4-viewport {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+    }
+
+
+    /* =========================================================
+   HORIZONTAL TIMELINE LINE
+   ========================================================= */
+
+    #phase4 .phase4-line {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 54.2%;
+        height: 1px;
+        background: rgba( 45, 40, 34, 0.11 );
+        z-index: 1;
+    }
+
+
+    /* =========================================================
+   HORIZONTAL TRACK
+   ========================================================= */
+
+    #phase4 .phase4-track {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        /*
+     * Screenshot jaisa huge spacing.
+     */
+
+        gap: 36vw;
+        /*
+     * First pair ko screen ke andar
+     * exactly position karne ke liye.
+     */
+
+        padding-left: 2.3vw;
+        padding-right: 30vw;
+        box-sizing: border-box;
+        will-change: transform;
+        transform: translate3d( 0, 0, 0 );
+    }
+
+
+    /* =========================================================
+   CARD
+   ========================================================= */
+
+    #phase4 .phase4-card {
+        position: relative;
+        flex: 0 0 348px;
+        width: 348px;
+        height: 448px;
+        padding: 13px;
+        box-sizing: border-box;
+        /*
+     * EXACT WARM CREAM / YELLOW CARD
+     */
+
+        background: #fff1d3;
+        border: 1px solid rgba( 175, 140, 83, 0.18 );
+        border-radius: 20px;
+        box-shadow: 0 3px 9px rgba( 78, 58, 31, 0.07 );
+        z-index: 5;
+    }
+
+
+    /* =========================================================
+   IMAGE
+   ========================================================= */
+
+    #phase4 .phase4-card-image {
+        width: 100%;
+        height: 238px;
+        overflow: hidden;
+        border-radius: 13px;
+        background: #e7dfd1;
+    }
+
+
+        #phase4 .phase4-card-image img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            user-select: none;
+            pointer-events: none;
+        }
+
+
+    /* =========================================================
+   CARD CONTENT
+   ========================================================= */
+
+    #phase4 .phase4-card-content {
+        padding: 24px 7px 8px;
+    }
+
+
+    /* =========================================================
+   YEAR
+   ========================================================= */
+
+    #phase4 .phase4-year {
+        margin: 0 0 18px;
+        font-family: "Times New Roman", Times, serif;
+        font-size: 31px;
+        line-height: 1;
+        font-weight: 400;
+        letter-spacing: -0.025em;
+        color: #16130f;
+    }
+
+
+    /* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+    #phase4 .phase4-card-content p {
+        margin: 0;
+        max-width: 300px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 17px;
+        line-height: 1.6;
+        font-weight: 400;
+        color: rgba( 37, 33, 28, 0.70 );
+    }
+
+
+    /* =========================================================
+   TIMELINE CONNECTOR
+   ========================================================= */
+
+    /*
+ * Card ke bottom/center se line
+ * timeline tak jaayegi.
+ */
+
+    #phase4 .phase4-card::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -70px;
+        width: 1px;
+        height: 70px;
+        background: rgba( 45, 40, 34, 0.12 );
+        transform: translateX(-50%);
+        z-index: -1;
+    }
+
+
+    /* =========================================================
+   TIMELINE DOT
+   ========================================================= */
+
+    #phase4 .phase4-card::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -74px;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #d8c2a4;
+        border: 2px solid #fbf8f1;
+        box-sizing: content-box;
+        transform: translateX(-50%);
+        z-index: 8;
+    }
+
+
+    /* =========================================================
+   END MESSAGE
+   ========================================================= */
+
+    #phase4 .phase4-end {
+        flex: 0 0 420px;
+        width: 420px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+
+        #phase4 .phase4-end span {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 46px;
+            line-height: 1;
+            color: rgba( 25, 22, 18, 0.65 );
+        }
+
+
+/* =========================================================
+   DESKTOP LARGE SCREEN
+   ========================================================= */
+
+@media (min-width: 1500px) {
+
+    #phase4 .phase4-track {
+        padding-left: 2.4vw;
+        gap: 36vw;
+    }
+
+
+    #phase4 .phase4-card {
+        flex-basis: 350px;
+        width: 350px;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media ( min-width: 701px ) and ( max-width: 1100px ) {
+
+    #phase4 {
+        height: 270vh;
+    }
+
+
+        #phase4 .phase4-track {
+            gap: 28vw;
+            padding-left: 3vw;
+            padding-right: 25vw;
+        }
+
+
+        #phase4 .phase4-card {
+            flex-basis: 310px;
+            width: 310px;
+            height: 420px;
+        }
+
+
+        #phase4 .phase4-card-image {
+            height: 220px;
+        }
+
+
+        #phase4 .phase4-card-content p {
+            font-size: 15px;
+        }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    #phase4 {
+        height: 280vh;
+    }
+
+
+        #phase4 .phase4-pin {
+            min-height: 600px;
+        }
+
+
+        #phase4 .phase4-heading {
+            top: 8vh;
+        }
+
+
+            #phase4 .phase4-heading h2 {
+                font-size: 43px;
+            }
+
+
+        #phase4 .phase4-line {
+            top: 54%;
+        }
+
+
+        #phase4 .phase4-track {
+            gap: 22vw;
+            padding-left: 6vw;
+            padding-right: 25vw;
+        }
+
+
+        #phase4 .phase4-card {
+            flex-basis: 275px;
+            width: 275px;
+            height: 375px;
+            padding: 10px;
+            border-radius: 16px;
+        }
+
+
+        #phase4 .phase4-card-image {
+            height: 195px;
+            border-radius: 11px;
+        }
+
+
+        #phase4 .phase4-card-content {
+            padding: 18px 5px 6px;
+        }
+
+
+        #phase4 .phase4-year {
+            font-size: 26px;
+            margin-bottom: 12px;
+        }
+
+
+        #phase4 .phase4-card-content p {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+
+        #phase4 .phase4-end {
+            flex-basis: 280px;
+            width: 280px;
+        }
+
+
+            #phase4 .phase4-end span {
+                font-size: 32px;
+            }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media ( prefers-reduced-motion: reduce ) {
+
+    #phase4 .phase4-track {
+        transform: none !important;
+    }
+}
+
+
+
+/* =========================================================
+   PHASE 5
+   WEDDING DAY TIMELINE
+   ================================================= */
+
+
+/* =========================================================
+   ROOT SECTION
+   ================================================= */
+
+#phase5 {
+    position: relative;
+    width: 100%;
+    background: #fbf8f1;
+    color: #111;
+    overflow: hidden;
+}
+
+
+    /* =========================================================
+   CONTAINER
+   ================================================= */
+
+    #phase5 .phase5-container {
+        position: relative;
+        width: 100%;
+        padding-top: 105px;
+        padding-bottom: 170px;
+    }
+
+
+    /* =========================================================
+   HEADER
+   ================================================= */
+
+    #phase5 .phase5-header {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 100px;
+    }
+
+
+    /* =========================================================
+   EYEBROW
+   ================================================= */
+
+    #phase5 .phase5-eyebrow {
+        margin-bottom: 18px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        line-height: 1;
+        font-weight: 600;
+        color: rgba( 190, 158, 125, 0.52 );
+    }
+
+
+    /* =========================================================
+   MAIN TITLE
+   ================================================= */
+
+    #phase5 .phase5-header h2 {
+        margin: 0;
+        font-family: "Times New Roman", Times, serif;
+        font-size: clamp( 55px, 5vw, 78px );
+        line-height: 1.03;
+        font-weight: 400;
+        letter-spacing: -0.055em;
+        color: #111;
+    }
+
+
+    /* =========================================================
+   TIMELINE
+   ========================================================= */
+
+    #phase5 .phase5-timeline {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    /* =========================================================
+   CENTER LINE
+   ========================================================= */
+
+    #phase5 .phase5-line {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 4px;
+        transform: translateX(-50%);
+        background: rgba( 219, 211, 198, 0.38 );
+        overflow: hidden;
+        z-index: 1;
+    }
+
+
+    /* =========================================================
+   LINE ANIMATED PROGRESS
+   ========================================================= */
+
+    #phase5 .phase5-line-progress {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 0%;
+        background: #e8dfd2;
+        transform-origin: top center;
+        will-change: height;
+    }
+
+
+    /* =========================================================
+   EVENT
+   ========================================================= */
+
+    #phase5 .phase5-event {
+        position: relative;
+        width: 100%;
+        min-height: 470px;
+        display: flex;
+        box-sizing: border-box;
+        z-index: 2;
+    }
+
+
+    /* =========================================================
+   LEFT / RIGHT WIDTH
+   ========================================================= */
+
+    #phase5 .phase5-event-left {
+        justify-content: flex-start;
+        padding-right: 50%;
+    }
+
+
+    #phase5 .phase5-event-right {
+        justify-content: flex-end;
+        padding-left: 50%;
+    }
+
+
+    /* =========================================================
+   EVENT INNER
+   ========================================================= */
+
+    #phase5 .phase5-event-inner {
+        position: relative;
+        width: 390px;
+        text-align: left;
+        opacity: 0;
+        transform: translateY(70px) scale(0.94);
+        transition: opacity 900ms cubic-bezier( 0.22, 1, 0.36, 1 ), transform 1000ms cubic-bezier( 0.22, 1, 0.36, 1 );
+    }
+
+
+    /* =========================================================
+   LEFT CONTENT
+   ========================================================= */
+
+    #phase5 .phase5-event-left
+    .phase5-event-inner {
+        margin-left: auto;
+        margin-right: 105px;
+        text-align: center;
+    }
+
+
+    /* =========================================================
+   RIGHT CONTENT
+   ========================================================= */
+
+    #phase5 .phase5-event-right
+    .phase5-event-inner {
+        margin-right: auto;
+        margin-left: 105px;
+        text-align: left;
+    }
+
+
+    /* =========================================================
+   ACTIVE EVENT
+   ========================================================= */
+
+    #phase5 .phase5-event.is-visible
+    .phase5-event-inner {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+
+    /* =========================================================
+   PHOTO STACK
+   ========================================================= */
+
+    #phase5 .phase5-photo-stack {
+        position: relative;
+        width: 225px;
+        height: 150px;
+        margin-bottom: 34px;
+    }
+
+
+    /* =========================================================
+   LEFT STACK POSITION
+   ========================================================= */
+
+    #phase5 .phase5-event-left
+    .phase5-photo-stack {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    /* =========================================================
+   RIGHT STACK POSITION
+   ========================================================= */
+
+    #phase5 .phase5-event-right
+    .phase5-photo-stack {
+        margin-left: 0;
+    }
+
+
+    /* =========================================================
+   PHOTO
+   ========================================================= */
+
+    #phase5 .phase5-photo {
+        position: absolute;
+        width: 120px;
+        height: 145px;
+        padding: 5px;
+        box-sizing: border-box;
+        background: #fff;
+        border-radius: 13px;
+        box-shadow: 0 3px 9px rgba( 30, 25, 20, 0.13 );
+        overflow: hidden;
+        transition: transform 900ms cubic-bezier( 0.22, 1, 0.36, 1 );
+    }
+
+
+        /* =========================================================
+   IMAGE
+   ========================================================= */
+
+        #phase5 .phase5-photo img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            user-select: none;
+            pointer-events: none;
+        }
+
+
+    /* =========================================================
+   BACK PHOTO
+   ========================================================= */
+
+    #phase5 .phase5-photo-back {
+        left: 0;
+        top: 3px;
+        transform: rotate(-8deg);
+        z-index: 1;
+    }
+
+
+    /* =========================================================
+   MIDDLE PHOTO
+   ========================================================= */
+
+    #phase5 .phase5-photo-middle {
+        left: 54px;
+        top: 0;
+        transform: rotate(-2deg);
+        z-index: 2;
+    }
+
+
+    /* =========================================================
+   FRONT PHOTO
+   ========================================================= */
+
+    #phase5 .phase5-photo-front {
+        left: 105px;
+        top: 4px;
+        transform: rotate(4deg);
+        z-index: 3;
+    }
+
+
+    /* =========================================================
+   HOVER PHOTO ANIMATION
+   ========================================================= */
+
+    #phase5 .phase5-photo-stack:hover
+    .phase5-photo-back {
+        transform: translateX(-12px) translateY(-5px) rotate(-12deg);
+    }
+
+
+    #phase5 .phase5-photo-stack:hover
+    .phase5-photo-middle {
+        transform: translateY(-10px) rotate(-3deg);
+    }
+
+
+    #phase5 .phase5-photo-stack:hover
+    .phase5-photo-front {
+        transform: translateX(12px) translateY(-5px) rotate(8deg);
+    }
+
+
+    /* =========================================================
+   TIME
+   ========================================================= */
+
+    #phase5 .phase5-time {
+        margin-bottom: 14px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        line-height: 1;
+        font-weight: 500;
+        color: rgba( 35, 32, 28, 0.60 );
+    }
+
+
+    /* =========================================================
+   EVENT TITLE
+   ========================================================= */
+
+    #phase5 .phase5-event h3 {
+        margin: 0 0 20px;
+        font-family: "Times New Roman", Times, serif;
+        font-size: 32px;
+        line-height: 1;
+        font-weight: 400;
+        letter-spacing: -0.035em;
+        color: #111;
+    }
+
+
+    /* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+    #phase5 .phase5-event p {
+        width: 330px;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 17px;
+        line-height: 1.52;
+        font-weight: 400;
+        color: rgba( 25, 23, 20, 0.92 );
+    }
+
+
+    /* =========================================================
+   LEFT DESCRIPTION
+   ========================================================= */
+
+    #phase5 .phase5-event-left p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    /* =========================================================
+   TIMELINE DOT
+   ========================================================= */
+
+    #phase5 .phase5-event::after {
+        content: "";
+        position: absolute;
+        top: 100px;
+        left: 50%;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #fbf8f1;
+        border: 2px solid #e4d9ca;
+        transform: translateX(-50%) scale(0.5);
+        opacity: 0;
+        z-index: 8;
+        transition: opacity 600ms ease, transform 700ms cubic-bezier( 0.22, 1, 0.36, 1 );
+    }
+
+
+    /* =========================================================
+   ACTIVE DOT
+   ========================================================= */
+
+    #phase5 .phase5-event.is-visible::after {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+        background: #fffaf2;
+    }
+
+
+    /* =========================================================
+   DOT PULSE
+   ========================================================= */
+
+    #phase5 .phase5-event.is-active::after {
+        box-shadow: 0 0 0 7px rgba( 210, 191, 165, 0.12 );
+    }
+
+
+    /* =========================================================
+   END
+   ========================================================= */
+
+    #phase5 .phase5-end {
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+
+        #phase5 .phase5-end span {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 42px;
+            font-weight: 400;
+            color: rgba( 25, 22, 18, 0.45 );
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 900ms ease, transform 900ms ease;
+        }
+
+
+        #phase5 .phase5-end.is-visible span {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media ( min-width: 701px ) and ( max-width: 1100px ) {
+
+    #phase5 .phase5-event-left
+    .phase5-event-inner {
+        margin-right: 65px;
+    }
+
+
+    #phase5 .phase5-event-right
+    .phase5-event-inner {
+        margin-left: 65px;
+    }
+
+
+    #phase5 .phase5-event p {
+        width: 290px;
+        font-size: 15px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    #phase5 .phase5-container {
+        padding-top: 75px;
+    }
+
+
+    #phase5 .phase5-header {
+        margin-bottom: 70px;
+        padding: 0 20px;
+    }
+
+
+    #phase5 .phase5-eyebrow {
+        font-size: 13px;
+    }
+
+
+    #phase5 .phase5-header h2 {
+        font-size: 45px;
+    }
+
+
+    #phase5 .phase5-line {
+        left: 32px;
+    }
+
+
+    #phase5 .phase5-event {
+        min-height: 450px;
+        padding-left: 75px !important;
+        padding-right: 20px !important;
+        justify-content: flex-start !important;
+    }
+
+
+    #phase5 .phase5-event-inner {
+        width: calc( 100vw - 100px );
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        text-align: left !important;
+    }
+
+
+    #phase5 .phase5-event::after {
+        left: 32px;
+    }
+
+
+    #phase5 .phase5-photo-stack {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        width: 215px;
+    }
+
+
+    #phase5 .phase5-event p {
+        width: 100%;
+        max-width: 300px;
+        font-size: 14px;
+    }
+
+
+    #phase5 .phase5-event h3 {
+        font-size: 28px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media ( prefers-reduced-motion: reduce ) {
+
+    #phase5 .phase5-event-inner {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+
+
+
+/* =========================================================
+   PHASE 6
+   ADDITIONAL DETAILS
+   ========================================================= */
+
+
+/* =========================================================
+   SECTION
+   ========================================================= */
+
+#phase6 {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: #fbf8f1;
+    color: #111;
+    overflow: hidden;
+}
+
+
+    /* =========================================================
+   CONTAINER
+   ========================================================= */
+
+    #phase6 .phase6-container {
+        width: min( 1265px, calc(100% - 80px) );
+        margin: 0 auto;
+        padding-top: 100px;
+        padding-bottom: 120px;
+    }
+
+
+    /* =========================================================
+   HEADER
+   ========================================================= */
+
+    #phase6 .phase6-header {
+        display: grid;
+        grid-template-columns: 1fr 420px;
+        align-items: start;
+        column-gap: 100px;
+        margin-bottom: 72px;
+    }
+
+
+    /* =========================================================
+   TITLE
+   ========================================================= */
+
+    #phase6 .phase6-title-wrap h2 {
+        margin: 0;
+        font-family: "Times New Roman", Times, serif;
+        font-size: clamp( 55px, 5vw, 72px );
+        line-height: 0.98;
+        font-weight: 400;
+        letter-spacing: -0.055em;
+        color: #111;
+    }
+
+
+    /* =========================================================
+   INTRO
+   ========================================================= */
+
+    #phase6 .phase6-intro {
+        padding-top: 3px;
+    }
+
+
+        #phase6 .phase6-intro p {
+            margin: 0;
+            max-width: 410px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            line-height: 1.42;
+            font-weight: 500;
+            color: rgba( 30, 28, 25, 0.90 );
+        }
+
+
+    /* =========================================================
+   CARDS GRID
+   ========================================================= */
+
+    #phase6 .phase6-cards {
+        display: grid;
+        grid-template-columns: repeat( 3, minmax(0, 1fr) );
+        gap: 20px;
+    }
+
+
+    /* =========================================================
+   CARD
+   ========================================================= */
+
+    #phase6 .phase6-card {
+        position: relative;
+        height: 553px;
+        overflow: hidden;
+        border-radius: 15px;
+        background: #222;
+        cursor: pointer;
+        isolation: isolate;
+        opacity: 0;
+        transform: translateY(90px) scale(0.97);
+        filter: blur(8px);
+        transition: opacity 1000ms cubic-bezier( 0.22, 1, 0.36, 1 ), transform 1100ms cubic-bezier( 0.22, 1, 0.36, 1 ), filter 1000ms cubic-bezier( 0.22, 1, 0.36, 1 );
+    }
+
+
+        /* =========================================================
+   CARD REVEALED
+   ========================================================= */
+
+        #phase6 .phase6-card.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+
+
+        /* =========================================================
+   STAGGER
+   ========================================================= */
+
+        #phase6 .phase6-card:nth-child(1) {
+            transition-delay: 0ms;
+        }
+
+
+        #phase6 .phase6-card:nth-child(2) {
+            transition-delay: 130ms;
+        }
+
+
+        #phase6 .phase6-card:nth-child(3) {
+            transition-delay: 260ms;
+        }
+
+
+    /* =========================================================
+   IMAGE WRAPPER
+   ========================================================= */
+
+    #phase6 .phase6-card-image {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+
+        /* =========================================================
+   IMAGE
+   ========================================================= */
+
+        #phase6 .phase6-card-image img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transform: scale(1.045);
+            will-change: transform;
+            transition: transform 1.5s cubic-bezier( 0.22, 1, 0.36, 1 );
+        }
+
+
+    /* =========================================================
+   IMAGE OVERLAY
+   ========================================================= */
+
+    #phase6 .phase6-image-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+        background: linear-gradient( to bottom, rgba( 0, 0, 0, 0.00 ) 35%, rgba( 0, 0, 0, 0.08 ) 53%, rgba( 0, 0, 0, 0.86 ) 100% );
+    }
+
+
+    /* =========================================================
+   CARD CONTENT
+   ========================================================= */
+
+    #phase6 .phase6-card-content {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+
+    /* =========================================================
+   TITLE
+   ========================================================= */
+
+    #phase6 .phase6-card-title {
+        padding: 0 20px 19px;
+    }
+
+
+        #phase6 .phase6-card-title h3 {
+            margin: 0;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 31px;
+            line-height: 1;
+            font-weight: 400;
+            letter-spacing: -0.045em;
+            color: #fff;
+        }
+
+
+    /* =========================================================
+   BOTTOM PANEL
+   ========================================================= */
+
+    #phase6 .phase6-card-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 91px;
+        padding: 17px 20px;
+        box-sizing: border-box;
+        background: rgba( 28, 27, 26, 0.68 );
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+
+
+    /* =========================================================
+   COPY
+   ========================================================= */
+
+    #phase6 .phase6-card-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+
+        #phase6 .phase6-card-copy strong {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            line-height: 1.2;
+            font-weight: 600;
+            color: #fff;
+        }
+
+
+        #phase6 .phase6-card-copy span {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            line-height: 1.2;
+            color: rgba( 255, 255, 255, 0.78 );
+        }
+
+
+    /* =========================================================
+   PLUS BUTTON
+   ========================================================= */
+
+    #phase6 .phase6-plus {
+        position: relative;
+        flex-shrink: 0;
+        width: 49px;
+        height: 49px;
+        border: 0;
+        border-radius: 12px;
+        background: rgba( 255, 255, 255, 0.43 );
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 500ms cubic-bezier( 0.22, 1, 0.36, 1 ), background 300ms ease;
+    }
+
+
+        /* =========================================================
+   PLUS LINES
+   ========================================================= */
+
+        #phase6 .phase6-plus span {
+            position: absolute;
+            width: 17px;
+            height: 1.5px;
+            background: #fff;
+            border-radius: 10px;
+        }
+
+
+            #phase6 .phase6-plus span:nth-child(2) {
+                transform: rotate(90deg);
+            }
+
+
+    /* =========================================================
+   CARD HOVER
+   ========================================================= */
+
+    #phase6 .phase6-card:hover {
+        transform: translateY(-8px) scale(1.005);
+        box-shadow: 0 18px 45px rgba( 25, 20, 15, 0.15 );
+    }
+
+
+        /* =========================================================
+   IMAGE ZOOM
+   ========================================================= */
+
+        #phase6 .phase6-card:hover
+        .phase6-card-image img {
+            transform: scale(1.10);
+        }
+
+
+        /* =========================================================
+   PLUS HOVER
+   ========================================================= */
+
+        #phase6 .phase6-card:hover
+        .phase6-plus {
+            transform: rotate(90deg) scale(1.08);
+            background: rgba( 255, 255, 255, 0.65 );
+        }
+
+
+    /* =========================================================
+   MODAL
+   ========================================================= */
+
+    #phase6 .phase6-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px;
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 500ms ease, visibility 500ms ease;
+    }
+
+
+        /* =========================================================
+   MODAL OPEN
+   ========================================================= */
+
+        #phase6 .phase6-modal.is-open {
+            visibility: visible;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+
+    /* =========================================================
+   MODAL BACKDROP
+   ========================================================= */
+
+    #phase6 .phase6-modal-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba( 20, 18, 16, 0.56 );
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+    }
+
+
+    /* =========================================================
+   MODAL PANEL
+   ========================================================= */
+
+    #phase6 .phase6-modal-panel {
+        position: relative;
+        z-index: 2;
+        width: min( 950px, 100% );
+        max-height: calc( 100vh - 60px );
+        display: grid;
+        grid-template-columns: 0.95fr 1fr;
+        overflow: hidden;
+        border-radius: 20px;
+        background: #fbf8f1;
+        box-shadow: 0 30px 100px rgba( 0, 0, 0, 0.28 );
+        transform: translateY(40px) scale(0.96);
+        transition: transform 700ms cubic-bezier( 0.22, 1, 0.36, 1 );
+    }
+
+
+    /* =========================================================
+   OPEN PANEL
+   ========================================================= */
+
+    #phase6 .phase6-modal.is-open
+    .phase6-modal-panel {
+        transform: translateY(0) scale(1);
+    }
+
+
+    /* =========================================================
+   MODAL IMAGE
+   ========================================================= */
+
+    #phase6 .phase6-modal-image {
+        min-height: 540px;
+        overflow: hidden;
+    }
+
+
+        #phase6 .phase6-modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+
+    /* =========================================================
+   MODAL CONTENT
+   ========================================================= */
+
+    #phase6 .phase6-modal-content {
+        align-self: center;
+        padding: 60px;
+    }
+
+
+    #phase6 .phase6-modal-label {
+        margin-bottom: 18px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba( 30, 28, 25, 0.45 );
+    }
+
+
+    #phase6 .phase6-modal-content h3 {
+        margin: 0 0 25px;
+        font-family: "Times New Roman", Times, serif;
+        font-size: 52px;
+        line-height: 0.98;
+        font-weight: 400;
+        letter-spacing: -0.05em;
+    }
+
+
+    #phase6 .phase6-modal-content p {
+        margin: 0;
+        max-width: 390px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 17px;
+        line-height: 1.65;
+        color: rgba( 30, 28, 25, 0.75 );
+    }
+
+
+    /* =========================================================
+   CLOSE
+   ========================================================= */
+
+    #phase6 .phase6-modal-close {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        z-index: 10;
+        width: 44px;
+        height: 44px;
+        border: 0;
+        border-radius: 50%;
+        background: rgba( 255, 255, 255, 0.80 );
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+        #phase6 .phase6-modal-close span {
+            position: absolute;
+            width: 18px;
+            height: 1.5px;
+            background: #111;
+        }
+
+
+            #phase6 .phase6-modal-close span:first-child {
+                transform: rotate(45deg);
+            }
+
+
+            #phase6 .phase6-modal-close span:last-child {
+                transform: rotate(-45deg);
+            }
+
+
+        #phase6 .phase6-modal-close:hover {
+            transform: rotate(90deg);
+        }
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media ( max-width: 1050px ) {
+
+    #phase6 .phase6-container {
+        width: calc( 100% - 50px );
+    }
+
+
+    #phase6 .phase6-header {
+        grid-template-columns: 1fr 340px;
+        column-gap: 50px;
+    }
+
+
+    #phase6 .phase6-card {
+        height: 500px;
+    }
+
+
+    #phase6 .phase6-card-title h3 {
+        font-size: 27px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media ( max-width: 700px ) {
+
+    #phase6 .phase6-container {
+        width: calc( 100% - 36px );
+        padding-top: 70px;
+        padding-bottom: 80px;
+    }
+
+
+    #phase6 .phase6-header {
+        display: block;
+        margin-bottom: 45px;
+    }
+
+
+    #phase6 .phase6-title-wrap h2 {
+        font-size: 48px;
+        margin-bottom: 25px;
+    }
+
+
+    #phase6 .phase6-intro p {
+        font-size: 14px;
+        max-width: 100%;
+    }
+
+
+    #phase6 .phase6-cards {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+
+    #phase6 .phase6-card {
+        height: 510px;
+    }
+
+
+    #phase6 .phase6-card-title h3 {
+        font-size: 30px;
+    }
+
+
+    #phase6 .phase6-modal {
+        padding: 15px;
+    }
+
+
+    #phase6 .phase6-modal-panel {
+        display: block;
+        max-height: calc( 100vh - 30px );
+        overflow-y: auto;
+    }
+
+
+    #phase6 .phase6-modal-image {
+        height: 330px;
+        min-height: 0;
+    }
+
+
+    #phase6 .phase6-modal-content {
+        padding: 35px 28px 45px;
+    }
+
+
+        #phase6 .phase6-modal-content h3 {
+            font-size: 42px;
+        }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media ( prefers-reduced-motion: reduce ) {
+
+    #phase6 .phase6-card {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        transition: none;
+    }
+
+
+    #phase6 .phase6-card-image img {
+        transition: none;
+    }
+}
+
+
+/* =========================================================
+   PHASE 7
+   FAQ
+   ========================================================= */
+
+#phase7 {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    background: #fbf8f1;
+    color: #111;
+}
+
+
+    /* =========================================================
+   CONTAINER
+   ========================================================= */
+
+    #phase7 .phase7-container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 88px 30px 125px;
+        box-sizing: border-box;
+    }
+
+
+    /* =========================================================
+   HEADER
+   ========================================================= */
+
+    #phase7 .phase7-header {
+        text-align: center;
+        margin-bottom: 68px;
+        opacity: 0;
+        transform: translateY(55px);
+        filter: blur(8px);
+        transition: opacity 1000ms cubic-bezier( 0.22, 1, 0.36, 1 ), transform 1000ms cubic-bezier( 0.22, 1, 0.36, 1 ), filter 1000ms cubic-bezier( 0.22, 1, 0.36, 1 );
+    }
+
+
+    /* =========================================================
+   HEADER VISIBLE
+   ========================================================= */
+
+    #phase7.is-visible .phase7-header {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+
+
+    /* =========================================================
+   EYEBROW
+   ========================================================= */
+
+    #phase7 .phase7-eyebrow {
+        margin-bottom: 34px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        line-height: 1;
+        font-weight: 600;
+        color: #e2d2be;
+    }
+
+
+    /* =========================================================
+   MAIN HEADING
+   ========================================================= */
+
+    #phase7 .phase7-header h2 {
+        margin: 0;
+        font-family: "Times New Roman", Times, serif;
+        font-size: clamp( 55px, 5vw, 72px );
+        line-height: 0.98;
+        font-weight: 400;
+        letter-spacing: -0.055em;
+        color: #111;
+    }
+
+
+    /* =========================================================
+   FAQ LIST
+   ========================================================= */
+
+    #phase7 .phase7-faq-list {
+        width: 100%;
+        max-width: 545px;
+        margin: 0 auto;
+    }
+
+
+    /* =========================================================
+   FAQ ITEM
+   ========================================================= */
+
+    #phase7 .phase7-item {
+        width: 100%;
+        margin-bottom: 22px;
+        opacity: 0;
+        transform: translateY(45px) scale(0.985);
+        filter: blur(5px);
+        transition: opacity 850ms cubic-bezier( 0.22, 1, 0.36, 1 ), transform 850ms cubic-bezier( 0.22, 1, 0.36, 1 ), filter 850ms cubic-bezier( 0.22, 1, 0.36, 1 );
+    }
+
+
+    /* =========================================================
+   STAGGER
+   ========================================================= */
+
+    #phase7.is-visible
+    .phase7-item:nth-child(1) {
+        transition-delay: 100ms;
+    }
+
+
+    #phase7.is-visible
+    .phase7-item:nth-child(2) {
+        transition-delay: 180ms;
+    }
+
+
+    #phase7.is-visible
+    .phase7-item:nth-child(3) {
+        transition-delay: 260ms;
+    }
+
+
+    #phase7.is-visible
+    .phase7-item:nth-child(4) {
+        transition-delay: 340ms;
+    }
+
+
+    #phase7.is-visible
+    .phase7-item:nth-child(5) {
+        transition-delay: 420ms;
+    }
+
+
+    #phase7.is-visible
+    .phase7-item:nth-child(6) {
+        transition-delay: 500ms;
+    }
+
+
+    /* =========================================================
+   ITEM VISIBLE
+   ========================================================= */
+
+    #phase7.is-visible .phase7-item {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+
+
+    /* =========================================================
+   QUESTION BUTTON
+   ========================================================= */
+
+    #phase7 .phase7-question {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        min-height: 55px;
+        padding: 0 16px 0 0;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        text-align: left;
+    }
+
+
+    /* =========================================================
+   PLUS BOX
+   ========================================================= */
+
+    #phase7 .phase7-plus {
+        position: relative;
+        flex: 0 0 54px;
+        width: 54px;
+        height: 54px;
+        margin-right: 11px;
+        border-radius: 14px;
+        background: #f4f1eb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 5px rgba( 40, 35, 28, 0.025 );
+        transition: background 400ms ease, transform 500ms cubic-bezier( 0.22, 1, 0.36, 1 );
+    }
+
+
+        /* =========================================================
+   PLUS LINES
+   ========================================================= */
+
+        #phase7 .phase7-plus span {
+            position: absolute;
+            width: 18px;
+            height: 1.5px;
+            border-radius: 10px;
+            background: #bdbab3;
+            transition: transform 500ms cubic-bezier( 0.22, 1, 0.36, 1 ), background 300ms ease;
+        }
+
+
+            #phase7 .phase7-plus span:nth-child(2) {
+                transform: rotate(90deg);
+            }
+
+
+    /* =========================================================
+   QUESTION BOX
+   ========================================================= */
+
+    #phase7 .phase7-question-text {
+        flex: 1;
+        min-height: 55px;
+        display: flex;
+        align-items: center;
+        padding: 0 24px;
+        border-radius: 11px;
+        background: #fff3d9;
+        border: 1px solid rgba( 222, 205, 173, 0.48 );
+        box-shadow: 0 2px 7px rgba( 70, 52, 28, 0.09 );
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        line-height: 1.3;
+        font-weight: 600;
+        color: #161616;
+        transition: transform 450ms cubic-bezier( 0.22, 1, 0.36, 1 ), box-shadow 450ms ease, background 350ms ease;
+    }
+
+
+    /* =========================================================
+   HOVER
+   ========================================================= */
+
+    #phase7 .phase7-question:hover
+    .phase7-question-text {
+        transform: translateX(4px);
+        box-shadow: 0 7px 18px rgba( 70, 52, 28, 0.10 );
+    }
+
+
+    #phase7 .phase7-question:hover
+    .phase7-plus {
+        transform: scale(1.035);
+    }
+
+
+    /* =========================================================
+   ACTIVE QUESTION
+   ========================================================= */
+
+    #phase7 .phase7-item.is-open
+    .phase7-plus {
+        background: #ebe7df;
+        transform: rotate(90deg);
+    }
+
+
+        #phase7 .phase7-item.is-open
+        .phase7-plus span {
+            background: #88847d;
+        }
+
+
+            /* =========================================================
+   ACTIVE PLUS
+   ========================================================= */
+
+            #phase7 .phase7-item.is-open
+            .phase7-plus span:nth-child(2) {
+                transform: rotate(0deg);
+            }
+
+
+    #phase7 .phase7-item.is-open
+    .phase7-question-text {
+        background: #fff0d0;
+    }
+
+
+    /* =========================================================
+   ANSWER WRAPPER
+   ========================================================= */
+
+    #phase7 .phase7-answer-wrap {
+        display: grid;
+        grid-template-rows: 0fr;
+        opacity: 0;
+        transition: grid-template-rows 650ms cubic-bezier( 0.22, 1, 0.36, 1 ), opacity 400ms ease;
+    }
+
+
+    /* =========================================================
+   OPEN ANSWER
+   ========================================================= */
+
+    #phase7 .phase7-item.is-open
+    .phase7-answer-wrap {
+        grid-template-rows: 1fr;
+        opacity: 1;
+    }
+
+
+    /* =========================================================
+   ANSWER
+   ========================================================= */
+
+    #phase7 .phase7-answer {
+        overflow: hidden;
+        min-height: 0;
+        padding: 0 0 0 65px;
+    }
+
+
+        /* =========================================================
+   ANSWER TEXT
+   ========================================================= */
+
+        #phase7 .phase7-answer p {
+            margin: 0;
+            padding: 16px 25px 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            line-height: 1.65;
+            font-weight: 400;
+            color: rgba( 30, 28, 25, 0.67 );
+            transform: translateY(-8px);
+            opacity: 0;
+            transition: opacity 500ms ease 100ms, transform 600ms cubic-bezier( 0.22, 1, 0.36, 1 ) 100ms;
+        }
+
+
+    /* =========================================================
+   ANSWER VISIBLE
+   ========================================================= */
+
+    #phase7 .phase7-item.is-open
+    .phase7-answer p {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+
+    /* =========================================================
+   ACTIVE QUESTION TRANSITION
+   ========================================================= */
+
+    #phase7 .phase7-item.is-open
+    .phase7-question {
+        margin-bottom: 2px;
+    }
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media ( max-width: 800px ) {
+
+    #phase7 .phase7-container {
+        padding: 80px 25px 100px;
+    }
+
+
+    #phase7 .phase7-header {
+        margin-bottom: 55px;
+    }
+
+
+    #phase7 .phase7-eyebrow {
+        margin-bottom: 28px;
+        font-size: 14px;
+    }
+
+
+    #phase7 .phase7-header h2 {
+        font-size: clamp( 48px, 8vw, 64px );
+    }
+
+
+    #phase7 .phase7-faq-list {
+        max-width: 600px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media ( max-width: 600px ) {
+
+    #phase7 .phase7-container {
+        padding: 65px 18px 85px;
+    }
+
+
+    #phase7 .phase7-header {
+        margin-bottom: 48px;
+    }
+
+
+    #phase7 .phase7-eyebrow {
+        font-size: 13px;
+        margin-bottom: 24px;
+    }
+
+
+    #phase7 .phase7-header h2 {
+        font-size: 45px;
+        line-height: 0.96;
+    }
+
+
+    #phase7 .phase7-item {
+        margin-bottom: 14px;
+    }
+
+
+    #phase7 .phase7-question {
+        min-height: 51px;
+        padding-right: 0;
+    }
+
+
+    #phase7 .phase7-plus {
+        flex-basis: 51px;
+        width: 51px;
+        height: 51px;
+        margin-right: 8px;
+        border-radius: 13px;
+    }
+
+
+    #phase7 .phase7-question-text {
+        min-height: 51px;
+        padding: 0 17px;
+        border-radius: 10px;
+        font-size: 14px;
+    }
+
+
+    #phase7 .phase7-answer {
+        padding-left: 59px;
+    }
+
+
+        #phase7 .phase7-answer p {
+            padding: 14px 15px 17px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media ( max-width: 390px ) {
+
+    #phase7 .phase7-header h2 {
+        font-size: 39px;
+    }
+
+
+    #phase7 .phase7-question-text {
+        font-size: 13px;
+        padding-left: 14px;
+        padding-right: 12px;
+    }
+
+
+    #phase7 .phase7-plus {
+        flex-basis: 47px;
+        width: 47px;
+        height: 47px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media ( prefers-reduced-motion: reduce ) {
+
+    #phase7 .phase7-header,
+    #phase7 .phase7-item {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        transition: none;
+    }
+
+
+    #phase7 .phase7-answer-wrap,
+    #phase7 .phase7-answer p,
+    #phase7 .phase7-plus,
+    #phase7 .phase7-plus span,
+    #phase7 .phase7-question-text {
+        transition: none;
+    }
+}
+
+/* =========================================================
+   PHASE 8
+   FINAL WEDDING HERO
+   ========================================================= */
+
+
+/* =========================================================
+   ROOT SECTION
+   ========================================================= */
+
+#phase8 {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 8px;
+    box-sizing: border-box;
+    background: #f8f5ee;
+    overflow: hidden;
+    color: #ffffff;
+}
+
+
+    /* =========================================================
+   FRAME
+   ========================================================= */
+
+    #phase8 .phase8-frame {
+        position: relative;
+        width: 100%;
+        height: calc(100vh - 16px);
+        min-height: 620px;
+        overflow: hidden;
+        border-radius: 15px;
+        background: #3c2b16;
+        isolation: isolate;
+    }
+
+
+    /* =========================================================
+   BACKGROUND
+   ========================================================= */
+
+    #phase8 .phase8-background {
+        position: absolute;
+        inset: 0;
+        z-index: -3;
+        overflow: hidden;
+    }
+
+
+    /* =========================================================
+   IMAGE
+   ========================================================= */
+
+    #phase8
+    .phase8-background-image {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+        transform: scale(1.06);
+        filter: saturate(0.90) contrast(1.02) brightness(0.88);
+        will-change: transform;
+    }
+
+
+    /* =========================================================
+   CINEMATIC OVERLAY
+   ========================================================= */
+
+    #phase8 .phase8-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        pointer-events: none;
+        background: linear-gradient( 180deg, rgba(38, 24, 10, 0.22) 0%, rgba(42, 25, 10, 0.04) 28%, rgba(20, 12, 5, 0.06) 58%, rgba(20, 10, 3, 0.28) 100% ), linear-gradient( 90deg, rgba(32, 19, 8, 0.23) 0%, transparent 42%, rgba(30, 18, 7, 0.10) 100% );
+    }
+
+
+    /* =========================================================
+   SUBTLE GOLDEN GLOW
+   ========================================================= */
+
+    #phase8 .phase8-frame::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background: radial-gradient( circle at 28% 30%, rgba( 255, 210, 125, 0.10 ), transparent 32% );
+        mix-blend-mode: screen;
+    }
+
+
+    /* =========================================================
+   QUOTE
+   ========================================================= */
+
+    #phase8 .phase8-quote {
+        position: absolute;
+        top: 47px;
+        left: 11.7%;
+        z-index: 3;
+        opacity: 0;
+        transform: translateY(35px);
+        filter: blur(8px);
+        transition: opacity 1100ms cubic-bezier( 0.22, 1, 0.36, 1 ), transform 1100ms cubic-bezier( 0.22, 1, 0.36, 1 ), filter 1100ms cubic-bezier( 0.22, 1, 0.36, 1 );
+    }
+
+
+        /* =========================================================
+   QUOTE TEXT
+   ========================================================= */
+
+        #phase8 .phase8-quote p {
+            margin: 0;
+            font-family: "Times New Roman", Times, serif;
+            font-size: clamp( 43px, 3.15vw, 57px );
+            line-height: 1.08;
+            font-weight: 400;
+            letter-spacing: -0.045em;
+            color: #ffffff;
+            text-shadow: 0 2px 16px rgba( 0, 0, 0, 0.22 );
+        }
+
+
+    /* =========================================================
+   RSVP
+   ========================================================= */
+
+    #phase8 .phase8-rsvp {
+        position: absolute;
+        top: 129px;
+        right: 11.4%;
+        z-index: 4;
+        opacity: 0;
+        transform: translateY(25px);
+        transition: opacity 900ms cubic-bezier( 0.22, 1, 0.36, 1 ) 250ms, transform 900ms cubic-bezier( 0.22, 1, 0.36, 1 ) 250ms;
+    }
+
+
+    /* =========================================================
+   RSVP BUTTON
+   ========================================================= */
+
+    #phase8 .phase8-rsvp-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        min-width: 179px;
+        height: 50px;
+        padding: 0 22px;
+        border: 0;
+        border-radius: 11px;
+        background: rgba( 255, 255, 255, 0.96 );
+        color: #17130e;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 8px 25px rgba( 0, 0, 0, 0.16 );
+        transition: transform 450ms cubic-bezier( 0.22, 1, 0.36, 1 ), box-shadow 450ms ease, background 350ms ease;
+    }
+
+
+        /* =========================================================
+   RSVP HOVER
+   ========================================================= */
+
+        #phase8 .phase8-rsvp-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 13px 30px rgba( 0, 0, 0, 0.23 );
+            background: #ffffff;
+        }
+
+
+    /* =========================================================
+   RSVP ARROW
+   ========================================================= */
+
+    #phase8 .phase8-arrow {
+        display: inline-flex;
+        font-size: 21px;
+        line-height: 1;
+        transition: transform 350ms cubic-bezier( 0.22, 1, 0.36, 1 );
+    }
+
+
+    #phase8
+    .phase8-rsvp-button:hover
+    .phase8-arrow {
+        transform: translateX(5px);
+    }
+
+
+    /* =========================================================
+   CENTER
+   ========================================================= */
+
+    #phase8 .phase8-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 3;
+        transform: translate( -50%, -38% );
+        width: 100%;
+        text-align: center;
+        pointer-events: none;
+    }
+
+
+    /* =========================================================
+   CENTER INNER
+   ========================================================= */
+
+    #phase8 .phase8-center-inner {
+        opacity: 0;
+        transform: translateY(45px) scale(0.96);
+        filter: blur(9px);
+        transition: opacity 1200ms cubic-bezier( 0.22, 1, 0.36, 1 ) 350ms, transform 1200ms cubic-bezier( 0.22, 1, 0.36, 1 ) 350ms, filter 1200ms cubic-bezier( 0.22, 1, 0.36, 1 ) 350ms;
+    }
+
+
+    /* =========================================================
+   CENTER TITLE
+   ========================================================= */
+
+    #phase8 .phase8-center h2 {
+        margin: 0;
+        font-family: "Times New Roman", Times, serif;
+        font-size: clamp( 55px, 5vw, 78px );
+        line-height: 1;
+        font-weight: 400;
+        letter-spacing: -0.055em;
+        color: #ffffff;
+        text-shadow: 0 3px 22px rgba( 0, 0, 0, 0.25 );
+    }
+
+
+    /* =========================================================
+   COPYRIGHT
+   ========================================================= */
+
+    #phase8 .phase8-copyright,
+    #phase8 .phase8-created {
+        position: absolute;
+        bottom: 42px;
+        z-index: 4;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        line-height: 1;
+        font-weight: 600;
+        color: rgba( 255, 255, 255, 0.82 );
+        text-shadow: 0 1px 8px rgba( 0, 0, 0, 0.35 );
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 800ms ease 500ms, transform 800ms cubic-bezier( 0.22, 1, 0.36, 1 ) 500ms;
+    }
+
+
+    /* =========================================================
+   COPYRIGHT LEFT
+   ========================================================= */
+
+    #phase8 .phase8-copyright {
+        left: 11.7%;
+    }
+
+
+    /* =========================================================
+   CREATED RIGHT
+   ========================================================= */
+
+    #phase8 .phase8-created {
+        right: 11.7%;
+    }
+
+
+    /* =========================================================
+   SECTION ACTIVE
+   ========================================================= */
+
+    #phase8.is-visible
+    .phase8-quote {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+
+
+    #phase8.is-visible
+    .phase8-rsvp {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+
+    #phase8.is-visible
+    .phase8-center-inner {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+
+
+    #phase8.is-visible
+    .phase8-copyright,
+    #phase8.is-visible
+    .phase8-created {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+
+    /* =========================================================
+   BACKGROUND CINEMATIC ZOOM
+   ========================================================= */
+
+    #phase8.is-visible
+    .phase8-background-image {
+        animation: phase8SlowZoom 18s ease-out forwards;
+    }
+
+
+@keyframes phase8SlowZoom {
+
+    0% {
+        transform: scale(1.08);
+    }
+
+    100% {
+        transform: scale(1.01);
+    }
+}
+
+
+/* =========================================================
+   RSVP MODAL
+   ========================================================= */
+
+#phase8 .phase8-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    box-sizing: border-box;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 450ms ease, visibility 450ms ease;
+}
+
+
+    /* =========================================================
+   MODAL OPEN
+   ========================================================= */
+
+    #phase8 .phase8-modal.is-open {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+
+/* =========================================================
+   MODAL BACKDROP
+   ========================================================= */
+
+#phase8 .phase8-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba( 24, 17, 9, 0.62 );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+
+/* =========================================================
+   MODAL CARD
+   ========================================================= */
+
+#phase8 .phase8-modal-card {
+    position: relative;
+    z-index: 2;
+    width: min( 100%, 500px );
+    padding: 48px;
+    box-sizing: border-box;
+    border-radius: 22px;
+    background: #fbf8f1;
+    color: #111;
+    box-shadow: 0 25px 80px rgba( 0, 0, 0, 0.30 );
+    transform: translateY(35px) scale(0.95);
+    opacity: 0;
+    transition: transform 600ms cubic-bezier( 0.22, 1, 0.36, 1 ), opacity 450ms ease;
+}
+
+
+/* =========================================================
+   MODAL CARD OPEN
+   ========================================================= */
+
+#phase8 .phase8-modal.is-open
+.phase8-modal-card {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
+
+#phase8 .phase8-modal-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 42px;
+    height: 42px;
+    border: 0;
+    border-radius: 50%;
+    background: #eee9df;
+    color: #555;
+    font-size: 27px;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform 300ms ease, background 300ms ease;
+}
+
+
+    #phase8 .phase8-modal-close:hover {
+        transform: rotate(90deg);
+        background: #e4ded3;
+    }
+
+
+/* =========================================================
+   MODAL EYEBROW
+   ========================================================= */
+
+#phase8 .phase8-modal-eyebrow {
+    margin-bottom: 22px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: #b59a77;
+}
+
+
+/* =========================================================
+   MODAL TITLE
+   ========================================================= */
+
+#phase8 .phase8-modal-card h3 {
+    margin: 0 0 18px;
+    font-family: "Times New Roman", Times, serif;
+    font-size: clamp( 42px, 6vw, 60px );
+    line-height: 0.98;
+    font-weight: 400;
+    letter-spacing: -0.045em;
+}
+
+
+/* =========================================================
+   MODAL DESCRIPTION
+   ========================================================= */
+
+#phase8 .phase8-modal-card > p {
+    margin: 0 0 28px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba( 20, 20, 20, 0.65 );
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+#phase8 .phase8-rsvp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+
+    /* =========================================================
+   INPUTS
+   ========================================================= */
+
+    #phase8
+    .phase8-rsvp-form input,
+    #phase8
+    .phase8-rsvp-form select {
+        width: 100%;
+        height: 53px;
+        padding: 0 17px;
+        box-sizing: border-box;
+        border: 1px solid #ded7ca;
+        border-radius: 10px;
+        outline: none;
+        background: #ffffff;
+        color: #111;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        transition: border-color 250ms ease, box-shadow 250ms ease;
+    }
+
+
+        #phase8
+        .phase8-rsvp-form input:focus,
+        #phase8
+        .phase8-rsvp-form select:focus {
+            border-color: #b99a70;
+            box-shadow: 0 0 0 3px rgba( 185, 154, 112, 0.13 );
+        }
+
+
+    /* =========================================================
+   FORM BUTTON
+   ========================================================= */
+
+    #phase8
+    .phase8-rsvp-form button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        height: 54px;
+        margin-top: 7px;
+        border: 0;
+        border-radius: 10px;
+        background: #17130e;
+        color: #ffffff;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 300ms ease, background 300ms ease;
+    }
+
+
+        #phase8
+        .phase8-rsvp-form button:hover {
+            transform: translateY(-2px);
+            background: #332719;
+        }
+
+
+        /* =========================================================
+   FORM ARROW
+   ========================================================= */
+
+        #phase8
+        .phase8-rsvp-form button span {
+            font-size: 20px;
+            transition: transform 300ms ease;
+        }
+
+
+        #phase8
+        .phase8-rsvp-form button:hover span {
+            transform: translateX(4px);
+        }
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media ( max-width: 900px ) {
+
+    #phase8 .phase8-quote {
+        left: 7%;
+    }
+
+
+    #phase8 .phase8-rsvp {
+        right: 7%;
+    }
+
+
+    #phase8 .phase8-copyright {
+        left: 7%;
+    }
+
+
+    #phase8 .phase8-created {
+        right: 7%;
+    }
+
+
+    #phase8 .phase8-quote p {
+        font-size: clamp( 38px, 5vw, 52px );
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media ( max-width: 600px ) {
+
+    #phase8 {
+        padding: 5px;
+    }
+
+
+        #phase8 .phase8-frame {
+            height: calc( 100svh - 10px );
+            min-height: 600px;
+            border-radius: 13px;
+        }
+
+
+        #phase8 .phase8-background-image {
+            object-position: 55% center;
+        }
+
+
+        #phase8 .phase8-quote {
+            top: 40px;
+            left: 25px;
+            right: 25px;
+        }
+
+
+            #phase8 .phase8-quote p {
+                font-size: 39px;
+                line-height: 1.04;
+            }
+
+
+        #phase8 .phase8-rsvp {
+            top: auto;
+            right: 25px;
+            bottom: 91px;
+        }
+
+
+        #phase8 .phase8-rsvp-button {
+            min-width: 160px;
+            height: 48px;
+            font-size: 14px;
+        }
+
+
+        #phase8 .phase8-center {
+            top: 52%;
+        }
+
+
+            #phase8 .phase8-center h2 {
+                font-size: 53px;
+            }
+
+
+        #phase8 .phase8-copyright,
+        #phase8 .phase8-created {
+            bottom: 27px;
+            font-size: 11px;
+        }
+
+
+        #phase8 .phase8-copyright {
+            left: 25px;
+        }
+
+
+        #phase8 .phase8-created {
+            right: 25px;
+        }
+
+
+        #phase8 .phase8-modal-card {
+            padding: 38px 25px 30px;
+            border-radius: 18px;
+        }
+
+
+            #phase8 .phase8-modal-card h3 {
+                font-size: 44px;
+            }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media ( max-width: 390px ) {
+
+    #phase8 .phase8-quote p {
+        font-size: 34px;
+    }
+
+
+    #phase8 .phase8-center h2 {
+        font-size: 46px;
+    }
+
+
+    #phase8 .phase8-rsvp {
+        right: 20px;
+        bottom: 82px;
+    }
+
+
+    #phase8 .phase8-copyright {
+        left: 20px;
+    }
+
+
+    #phase8 .phase8-created {
+        right: 20px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media ( prefers-reduced-motion: reduce ) {
+
+    #phase8 .phase8-quote,
+    #phase8 .phase8-rsvp,
+    #phase8 .phase8-center-inner,
+    #phase8 .phase8-copyright,
+    #phase8 .phase8-created {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        transition: none;
+    }
+
+
+    #phase8 .phase8-background-image {
+        animation: none;
+        transform: scale(1);
+    }
+}

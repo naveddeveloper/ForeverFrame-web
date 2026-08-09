@@ -1,0 +1,22 @@
+# Emscripten SDK
+emsdk/
+
+# Build files
+build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.log
+
+# Emscripten generated files
+*.wasm.map
+
+.vs/

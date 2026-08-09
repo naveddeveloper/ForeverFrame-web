@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Naved & Emily</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+</head>
+
+
+<body>
+
+    <!-- Splash Screen Video -->
+
+    <div id="intro-video">
+
+        <video id="introVideo"
+               playsinline
+               preload="auto">
+            <source src="assets/video/splash.mp4"
+                    type="video/mp4">
+        </video>
+
+        <div class="intro-content">
+
+            <button id="startIntro"
+                    type="button">
+                Open Invitation
+            </button>
+
+        </div>
+
+    </div>
+    <!--  WEBGL BACKGROUND -->
+
+    <canvas id="webgl"></canvas>
+    <audio id="weddingMusic"
+           src="assets/audio/music-web.mp3"
+           loop
+           preload="auto">
+    </audio>
+
+
+    <main id="site">
+
+        <section id="hero"
+                 class="hero">
+
+            <!--HERO IMAGE -->
+
+            <div class="hero-image-wrap">
+
+                <img id="heroImage"
+                     class="hero-image"
+                     src="assets/images/couple-image.jpg"
+                     alt="Naved and Someone">
+
+            </div>
+
+
+            <!--  DARK / LIGHT IMAGE OVERLAY -->
+
+            <div class="hero-overlay"></div>
+
+
+            <!-- FLOATING PETALS-->
+
+            <div class="petal petal-1"
+                 aria-hidden="true"></div>
+
+            <div class="petal petal-2"
+                 aria-hidden="true"></div>
+
+            <div class="petal petal-3"
+                 aria-hidden="true"></div>
+
+            <div class="petal petal-4"
+                 aria-hidden="true"></div>
+
+            <div class="petal petal-5"
+                 aria-hidden="true"></div>
+
+            <div class="petal petal-6"
+                 aria-hidden="true"></div>
+
+
+            <!-- TOP RIGHT MUTE BUTTON -->
+
+            <button id="muteButton"
+                    class="mute-button"
+                    type="button"
+                    aria-label="Sound">
+
+                <span class="mute-icon">
+                    ♬
+                </span>
+
+            </button>
+
+
+            <!--HERO CONTENT -->
+
+            <div class="hero-content">
+
+                <p class="hero-eyebrow">
+                    Inviting you to
+                </p>
+
+
+                <h1 class="hero-title">
+                    Naved &amp; Emily's
+                </h1>
+
+
+                <p class="hero-subtitle">
+                    Wedding celebration
+                </p>
+
+            </div>
+
+
+            <!--SCROLL BUTTON -->
+
+            <button id="scrollButton"
+                    class="scroll-button"
+                    type="button">
+
+                <span>
+                    Scroll Below
+                </span>
+
+                <span class="scroll-arrow">
+                    ↓
+                </span>
+
+            </button>
+
+
+            <!--SMALL BOTTOM LABEL-->
+
+            <div class="hero-bottom-left">
+                Wedding Day
+            </div>
+
+
+            <div class="hero-bottom-right">
+                31.08.2026
+            </div>
+
+        </section>
+
+
+        <!-- PHASE 2 -->
+
+        <section id="phase2"
+                 class="phase2">
+
+            <!-- Decorative background elements -->
+
+            <div class="phase2-decoration left"
+                 aria-hidden="true"></div>
+
+            <div class="phase2-decoration right"
+                 aria-hidden="true"></div>
+
+
+            <!-- INTRO -->
+
+            <div class="phase2-intro">
+
+                <h2>
+
+                    <span class="phase2-intro-line">
+                        If you've received this you're so special
+                    </span>
+
+                    <span class="phase2-intro-line">
+                        to us and you're cordially invited to
+                    </span>
+
+                    <span class="phase2-intro-line">
+                        celebrate our wedding on...
+                    </span>
+
+                </h2>
+
+            </div>
+
+
+            <!-- SCRATCH AREA -->
+
+            <div class="phase2-reveal-area">
+
+                <div class="phase2-label">
+                    Scratch to reveal
+                </div>
+
+
+                <div id="scratchCard"
+                     class="scratch-card">
+
+                    <!--CONTENT BEHIND GOLD -->
+
+                    <div class="scratch-content">
+
+                        <div class="scratch-content-inner">
+
+                            <div class="scratch-small">
+                                Wedding Day
+                            </div>
+
+                            <div class="scratch-names">
+                                John & Emily
+                            </div>
+
+                            <div class="scratch-date">
+                                AUGUST 31ST
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!--SCRATCH CANVAS-->
+
+                    <canvas id="scratchCanvas"></canvas>
+
+                </div>
+
+
+                <div class="scratch-hint">
+                    Drag across the card to reveal
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PHASE 3
+        WEDDING VENUE-->
+
+        <section id="phase3"
+                 class="phase3">
+
+            <!-- LABEL-->
+
+            <div class="phase3-label">
+                Wedding Venue
+            </div>
+
+
+            <!-- HEADING-->
+
+            <h2 class="phase3-title">
+
+                <span>
+                    So kindly join us on
+                </span>
+
+                <span>
+                    August 31st at....
+                </span>
+
+            </h2>
+
+
+            <!-- WATERCOLOUR ART-->
+
+            <div class="phase3-art">
+
+                <img id="phase3Image"
+                     class="phase3-image"
+                     src="assets/images/venue-watercolor.png"
+                     alt="Watercolour illustration of the wedding venue"
+                     draggable="false">
+
+            </div>
+
+
+            <!--VENUE NAME -->
+
+            <div class="phase3-venue">
+
+                <div class="phase3-invitation">
+                    Invitation To
+                </div>
+
+
+                <div class="phase3-venue-name">
+                    Cateau Bel Fleur
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- PHASE 4 — PINNED HORIZONTAL STORY TIMELINE-->
+
+        <section id="phase4">
+
+            <div class="phase4-pin">
+
+                <!--HEADING-->
+
+                <div class="phase4-heading">
+
+                    <h2>Here's our story</h2>
+
+                </div>
+
+
+                <!-- TIMELINE VIEWPORT -->
+
+                <div class="phase4-viewport">
+
+                    <!-- Thin horizontal timeline -->
+                    <div class="phase4-line"></div>
+
+
+                    <!-- HORIZONTAL TRACK -->
+
+                    <div class="phase4-track">
+
+
+                        <!-- 2023 -->
+
+                        <article class="phase4-card">
+
+                            <div class="phase4-card-image">
+
+                                <img src="assets/images/story-2025i.jpg"
+                                     alt="Our story in 2023"
+                                     draggable="false">
+
+                            </div>
+
+
+                            <div class="phase4-card-content">
+
+                                <h3 class="phase4-year">
+                                    2023
+                                </h3>
+
+                                <p>
+                                    Late-night talks turned into
+                                    early mornings, and suddenly we were
+                                    inseparable.
+                                </p>
+
+                            </div>
+
+                        </article>
+
+
+
+                        <!-- 2024 -->
+
+                        <article class="phase4-card">
+
+                            <div class="phase4-card-image">
+
+                                <img src="assets/images/story-2025f.jpg"
+                                     alt="Our story in 2024"
+                                     draggable="false">
+
+                            </div>
+
+
+                            <div class="phase4-card-content">
+
+                                <h3 class="phase4-year">
+                                    2024
+                                </h3>
+
+                                <p>
+                                    From spontaneous road trips to
+                                    quiet evenings in, every moment felt
+                                    like home.
+                                </p>
+
+                            </div>
+
+                        </article>
+
+
+
+                        <!-- 2025 -->
+
+                        <article class="phase4-card">
+
+                            <div class="phase4-card-image">
+
+                                <img src="assets/images/story-2025j.jpg"
+                                     alt="Our story in 2025"
+                                     draggable="false">
+
+                            </div>
+
+
+                            <div class="phase4-card-content">
+
+                                <h3 class="phase4-year">
+                                    2025
+                                </h3>
+
+                                <p>
+                                    On a perfect ordinary day, at a
+                                    special location, one question
+                                    turned into a forever yes.
+                                </p>
+
+                            </div>
+
+                        </article>
+
+
+
+                        <!-- 2026-->
+
+                        <article class="phase4-card">
+
+                            <div class="phase4-card-image">
+
+                                <img src="assets/images/story-2025b.jpg"
+                                     alt="Our story in 2026"
+                                     draggable="false">
+
+                            </div>
+
+
+                            <div class="phase4-card-content">
+
+                                <h3 class="phase4-year">
+                                    2026
+                                </h3>
+
+                                <p>
+                                    Now we say I do, and the best
+                                    chapter of all begins. Our forever
+                                    begins here.
+                                </p>
+
+                            </div>
+
+                        </article>
+
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+
+
+        <!-- PHASE 5
+        WEDDING DAY TIMELINE -->
+
+        <section id="phase5">
+
+            <div class="phase5-container">
+
+                <!--HEADER -->
+
+                <header class="phase5-header">
+
+                    <div class="phase5-eyebrow">
+                        Wedding Day
+                    </div>
+
+                    <h2>
+                        Here's how things<br>
+                        will unfold
+                    </h2>
+
+                </header>
+
+
+                <!-- TIMELINE -->
+
+                <div class="phase5-timeline">
+
+                    <!-- CENTER LINE -->
+
+                    <div class="phase5-line">
+
+                        <div class="phase5-line-progress"></div>
+
+                    </div>
+
+
+                    <!-- EVENT 01 LEFT -->
+
+                    <article class="phase5-event phase5-event-left"
+                             data-event="1">
+
+                        <div class="phase5-event-inner">
+
+
+                            <!-- PHOTO STACK -->
+
+                            <div class="phase5-photo-stack">
+
+                                <div class="phase5-photo phase5-photo-back">
+
+                                    <img src="assets/images/story-2025f.jpg"
+                                         alt=""
+                                         draggable="false">
+
+                                </div>
+
+
+                                <div class="phase5-photo phase5-photo-middle">
+
+                                    <img src="assets/images/story-2025i.jpg"
+                                         alt=""
+                                         draggable="false">
+
+                                </div>
+
+
+                                <div class="phase5-photo phase5-photo-front">
+
+                                    <img src="assets/images/story-2025j.jpg"
+                                         alt="Guests arriving"
+                                         draggable="false">
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- TIME -->
+
+                            <div class="phase5-time">
+                                2:00 PM
+                            </div>
+
+
+                            <!-- TITLE -->
+
+                            <h3>
+                                Guests arrive
+                            </h3>
+
+
+                            <!-- DESCRIPTION -->
+
+                            <p>
+                                As loved ones gather from near and
+                                far, enjoy warm conversations and the
+                                excitement of the celebration ahead.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!--EVENT 02 RIGHT -->
+
+                    <article class="phase5-event phase5-event-right"
+                             data-event="2">
+
+                        <div class="phase5-event-inner">
+
+
+                            <!-- PHOTO STACK -->
+
+                            <div class="phase5-photo-stack">
+
+                                <div class="phase5-photo phase5-photo-back">
+
+                                    <img src="assets/images/story-2025k.jpg"
+                                         alt=""
+                                         draggable="false">
+
+                                </div>
+
+
+                                <div class="phase5-photo phase5-photo-middle">
+
+                                    <img src="assets/images/story-2025l.jpg"
+                                         alt=""
+                                         draggable="false">
+
+                                </div>
+
+
+                                <div class="phase5-photo phase5-photo-front">
+
+                                    <img src="assets/images/story-2025m.jpg"
+                                         alt="Wedding ceremony"
+                                         draggable="false">
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- TIME -->
+
+                            <div class="phase5-time">
+                                3:00 PM
+                            </div>
+
+
+                            <!-- TITLE -->
+
+                            <h3>
+                                Ceremony
+                            </h3>
+
+
+                            <!-- DESCRIPTION -->
+
+                            <p>
+                                Gather together as we exchange vows,
+                                share a few happy tears, and begin
+                                this beautiful new chapter.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- EVENT 03  LEFT -->
+
+                    <article class="phase5-event phase5-event-left"
+                             data-event="3">
+
+                        <div class="phase5-event-inner">
+
+
+                            <div class="phase5-photo-stack">
+
+                                <div class="phase5-photo phase5-photo-back">
+
+                                    <img src="assets/images/story-2025n.jpg"
+                                         alt=""
+                                         draggable="false">
+
+                                </div>
+
+
+                                <div class="phase5-photo phase5-photo-middle">
+
+                                    <img src="assets/images/story-2025o.jpg"
+                                         alt=""
+                                         draggable="false">
+
+                                </div>
+
+
+                                <div class="phase5-photo phase5-photo-front">
+
+                                    <img src="assets/images/story-20252j.jpg"
+                                         alt="Cocktail hour"
+                                         draggable="false">
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="phase5-time">
+                                4:00 PM
+                            </div>
+
+
+                            <h3>
+                                Cocktail hour
+                            </h3>
+
+
+                            <p>
+                                Enjoy handcrafted drinks, delicious
+                                bites, and meaningful conversations
+                                while we capture a few cherished
+                                memories.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- EVENT 04  RIGHT -->
+
+                    <article class="phase5-event phase5-event-right"
+                             data-event="4">
+
+                        <div class="phase5-event-inner">
+
+
+                            <div class="phase5-photo-stack">
+
+                                <div class="phase5-photo phase5-photo-back">
+
+                                    <img src="assets/images/story-2025c.jpg"
+                                         alt=""
+                                         draggable="false">
+
+                                </div>
+
+
+                                <div class="phase5-photo phase5-photo-middle">
+
+                                    <img src="assets/images/story-2025d.jpg"
+                                         alt=""
+                                         draggable="false">
+
+                                </div>
+
+
+                                <div class="phase5-photo phase5-photo-front">
+
+                                    <img src="assets/images/story-2025e.jpg"
+                                         alt="Dinner and toasts"
+                                         draggable="false">
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="phase5-time">
+                                6:00 PM
+                            </div>
+
+
+                            <h3>
+                                Dinner &amp; toasts
+                            </h3>
+
+
+                            <p>
+                                Share a memorable meal as family and
+                                friends raise their glasses and
+                                celebrate the journey that brought
+                                us here.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- EVENT 05 LEFT -->
+
+                    <article class="phase5-event phase5-event-left"
+                             data-event="5">
+
+                        <div class="phase5-event-inner">
+
+
+                            <div class="phase5-photo-stack">
+
+                                <div class="phase5-photo phase5-photo-back">
+
+                                    <img src="assets/images/story-2025a.jpg"
+                                         alt=""
+                                         draggable="false">
+
+                                </div>
+
+
+                                <div class="phase5-photo phase5-photo-middle">
+
+                                    <img src="assets/images/story-2025k.jpg"
+                                         alt=""
+                                         draggable="false">
+
+                                </div>
+
+
+                                <div class="phase5-photo phase5-photo-front">
+
+                                    <img src="assets/images/story-2025f.jpg"
+                                         alt="First dance"
+                                         draggable="false">
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="phase5-time">
+                                8:00 PM
+                            </div>
+
+
+                            <h3>
+                                First dance
+                            </h3>
+
+
+                            <p>
+                                The music begins, the dance floor
+                                opens, and an unforgettable evening
+                                of joy and celebration comes alive.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- EVENT 06 RIGHT -->
+
+                    <article class="phase5-event phase5-event-right"
+                             data-event="6">
+
+                        <div class="phase5-event-inner">
+
+
+                            <div class="phase5-photo-stack">
+
+                                <div class="phase5-photo phase5-photo-back">
+
+                                    <img src="assets/images/story-2025e.jpg"
+                                         alt=""
+                                         draggable="false">
+
+                                </div>
+
+
+                                <div class="phase5-photo phase5-photo-middle">
+
+                                    <img src="assets/images/story-2025d.jpg"
+                                         alt=""
+                                         draggable="false">
+
+                                </div>
+
+
+                                <div class="phase5-photo phase5-photo-front">
+
+                                    <img src="assets/images/story-2025o.jpg"
+                                         alt="Sweet farewell"
+                                         draggable="false">
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="phase5-time">
+                                10:00 PM
+                            </div>
+
+
+                            <h3>
+                                Sweet farewell
+                            </h3>
+
+
+                            <p>
+                                As the night comes to a close, we thank
+                                you for your love, support, and for being
+                                part of this special day in our lives.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- Section 6 ADDITIONAL DETAILS -->
+
+        <section id="phase6">
+
+            <div class="phase6-container">
+
+                <!-- HEADER -->
+
+                <div class="phase6-header">
+
+                    <div class="phase6-title-wrap">
+
+                        <h2>
+                            Additional Details
+                        </h2>
+
+                    </div>
+
+
+                    <div class="phase6-intro">
+
+                        <p>
+                            We've pulled together all the practical bits
+                            in one spot. Explore accommodations, dining,
+                            dress code, and more below so you can arrive
+                            relaxed and fully ready.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!--CARDS-->
+
+                <div class="phase6-cards">
+
+
+                    <!--CARD 01 -->
+
+                    <article class="phase6-card"
+                             data-detail="accommodations">
+
+                        <div class="phase6-card-image">
+
+                            <img src="assets/images/story-2025a.jpg"
+                                 alt="Accommodations"
+                                 draggable="false">
+
+                        </div>
+
+
+                        <!-- IMAGE OVERLAY -->
+
+                        <div class="phase6-image-overlay"></div>
+
+
+                        <!-- CARD CONTENT -->
+
+                        <div class="phase6-card-content">
+
+                            <div class="phase6-card-title">
+
+                                <h3>
+                                    Accommodations
+                                </h3>
+
+                            </div>
+
+
+                            <div class="phase6-card-bottom">
+
+                                <div class="phase6-card-copy">
+
+                                    <strong>
+                                        Full Description Inside
+                                    </strong>
+
+                                    <span>
+                                        Tap to view
+                                    </span>
+
+                                </div>
+
+
+                                <button class="phase6-plus"
+                                        type="button"
+                                        aria-label="View accommodations details">
+
+                                    <span></span>
+                                    <span></span>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- CARD 02-->
+
+                    <article class="phase6-card"
+                             data-detail="food">
+
+                        <div class="phase6-card-image">
+
+                            <img src="assets/images/story-2025b.jpg"
+                                 alt="Food and Drinks"
+                                 draggable="false">
+
+                        </div>
+
+
+                        <div class="phase6-image-overlay"></div>
+
+
+                        <div class="phase6-card-content">
+
+                            <div class="phase6-card-title">
+
+                                <h3>
+                                    Food &amp; Drinks
+                                </h3>
+
+                            </div>
+
+
+                            <div class="phase6-card-bottom">
+
+                                <div class="phase6-card-copy">
+
+                                    <strong>
+                                        Full Description Inside
+                                    </strong>
+
+                                    <span>
+                                        Tap to view
+                                    </span>
+
+                                </div>
+
+
+                                <button class="phase6-plus"
+                                        type="button"
+                                        aria-label="View food and drinks details">
+
+                                    <span></span>
+                                    <span></span>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- CARD 03 -->
+
+                    <article class="phase6-card"
+                             data-detail="dress">
+
+                        <div class="phase6-card-image">
+
+                            <img src="assets/images/story-2025c.jpg"
+                                 alt="Dress Code"
+                                 draggable="false">
+
+                        </div>
+
+
+                        <div class="phase6-image-overlay"></div>
+
+
+                        <div class="phase6-card-content">
+
+                            <div class="phase6-card-title">
+
+                                <h3>
+                                    Dress Code
+                                </h3>
+
+                            </div>
+
+
+                            <div class="phase6-card-bottom">
+
+                                <div class="phase6-card-copy">
+
+                                    <strong>
+                                        Full Description Inside
+                                    </strong>
+
+                                    <span>
+                                        Tap to view
+                                    </span>
+
+                                </div>
+
+
+                                <button class="phase6-plus"
+                                        type="button"
+                                        aria-label="View dress code details">
+
+                                    <span></span>
+                                    <span></span>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!--DETAIL MODAL -->
+
+            <div class="phase6-modal"
+                 aria-hidden="true">
+
+                <div class="phase6-modal-backdrop"></div>
+
+
+                <div class="phase6-modal-panel"
+                     role="dialog"
+                     aria-modal="true">
+
+                    <button class="phase6-modal-close"
+                            type="button"
+                            aria-label="Close details">
+
+                        <span></span>
+                        <span></span>
+
+                    </button>
+
+
+                    <div class="phase6-modal-image">
+
+                        <img src=""
+                             alt="">
+
+                    </div>
+
+
+                    <div class="phase6-modal-content">
+
+                        <div class="phase6-modal-label">
+                            Additional Details
+                        </div>
+
+
+                        <h3></h3>
+
+
+                        <p></p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- Section 7 FAQ SECTION -->
+
+        <section id="phase7">
+
+            <div class="phase7-container">
+
+                <!-- HEADER -->
+
+                <div class="phase7-header">
+
+                    <div class="phase7-eyebrow">
+                        Frequently Asked Questions
+                    </div>
+
+                    <h2>
+                        Here are answers<br>
+                        to your questions
+                    </h2>
+
+                </div>
+
+
+                <!--FAQ LIST-->
+
+                <div class="phase7-faq-list">
+
+
+                    <!--FAQ 01-->
+
+                    <article class="phase7-item">
+
+                        <button class="phase7-question"
+                                type="button"
+                                aria-expanded="false">
+
+                            <span class="phase7-plus">
+
+                                <span></span>
+                                <span></span>
+
+                            </span>
+
+
+                            <span class="phase7-question-text">
+                                What time should I arrive?
+                            </span>
+
+                        </button>
+
+
+                        <div class="phase7-answer-wrap">
+
+                            <div class="phase7-answer">
+
+                                <p>
+                                    We recommend arriving around 30 minutes
+                                    before the ceremony begins. This gives
+                                    everyone plenty of time to settle in,
+                                    find their seats, and enjoy the atmosphere
+                                    before the celebration starts.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- FAQ 02-->
+
+                    <article class="phase7-item">
+
+                        <button class="phase7-question"
+                                type="button"
+                                aria-expanded="false">
+
+                            <span class="phase7-plus">
+
+                                <span></span>
+                                <span></span>
+
+                            </span>
+
+
+                            <span class="phase7-question-text">
+                                Will the ceremony be indoors or outdoors?
+                            </span>
+
+                        </button>
+
+
+                        <div class="phase7-answer-wrap">
+
+                            <div class="phase7-answer">
+
+                                <p>
+                                    The ceremony will take place outdoors,
+                                    surrounded by the beautiful venue grounds.
+                                    If the weather requires it, everything can
+                                    comfortably move indoors.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- FAQ 03-->
+
+                    <article class="phase7-item">
+
+                        <button class="phase7-question"
+                                type="button"
+                                aria-expanded="false">
+
+                            <span class="phase7-plus">
+
+                                <span></span>
+                                <span></span>
+
+                            </span>
+
+
+                            <span class="phase7-question-text">
+                                How do I RSVP?
+                            </span>
+
+                        </button>
+
+
+                        <div class="phase7-answer-wrap">
+
+                            <div class="phase7-answer">
+
+                                <p>
+                                    Please use the RSVP section of your
+                                    invitation to confirm whether you'll be
+                                    joining us. We kindly ask that you respond
+                                    before the RSVP deadline shown on your
+                                    invitation.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- FAQ 04-->
+
+                    <article class="phase7-item">
+
+                        <button class="phase7-question"
+                                type="button"
+                                aria-expanded="false">
+
+                            <span class="phase7-plus">
+
+                                <span></span>
+                                <span></span>
+
+                            </span>
+
+
+                            <span class="phase7-question-text">
+                                Are children welcome?
+                            </span>
+
+                        </button>
+
+
+                        <div class="phase7-answer-wrap">
+
+                            <div class="phase7-answer">
+
+                                <p>
+                                    Children are warmly welcome to celebrate
+                                    with us. We hope the whole family can enjoy
+                                    this special day together.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- FAQ 05 -->
+
+                    <article class="phase7-item">
+
+                        <button class="phase7-question"
+                                type="button"
+                                aria-expanded="false">
+
+                            <span class="phase7-plus">
+
+                                <span></span>
+                                <span></span>
+
+                            </span>
+
+
+                            <span class="phase7-question-text">
+                                Can I take photos during the ceremony?
+                            </span>
+
+                        </button>
+
+
+                        <div class="phase7-answer-wrap">
+
+                            <div class="phase7-answer">
+
+                                <p>
+                                    We'd love for you to capture memories
+                                    throughout the day. During the ceremony,
+                                    however, we kindly ask everyone to keep
+                                    phones and cameras discreet so the moment
+                                    remains intimate.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- FAQ 06-->
+
+                    <article class="phase7-item">
+
+                        <button class="phase7-question"
+                                type="button"
+                                aria-expanded="false">
+
+                            <span class="phase7-plus">
+
+                                <span></span>
+                                <span></span>
+
+                            </span>
+
+
+                            <span class="phase7-question-text">
+                                Is there a dress code?
+                            </span>
+
+                        </button>
+
+
+                        <div class="phase7-answer-wrap">
+
+                            <div class="phase7-answer">
+
+                                <p>
+                                    We'd love to see you dressed for the
+                                    occasion. Elegant and comfortable evening
+                                    attire is perfect for celebrating with us.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Section 8 FINAL WEDDING HERO -->
+
+        <section id="phase8">
+
+            <div class="phase8-frame">
+
+                <!--BACKGROUND IMAGE-->
+
+                <div class="phase8-background">
+
+                    <img class="phase8-background-image"
+                         src="assets/images/end.jpg"
+                         alt="Wedding couple">
+
+                </div>
+
+
+                <!--CINEMATIC OVERLAY-->
+
+                <div class="phase8-overlay"></div>
+
+
+                <!--TOP LEFT QUOTE-->
+
+                <div class="phase8-quote">
+
+                    <p>
+                        Can't wait to spend the<br>
+                        rest of my life with you.
+                    </p>
+
+                </div>
+
+
+                <!-- TOP RIGHT RSVP-->
+
+                <div class="phase8-rsvp">
+
+                    <button type="button"
+                            class="phase8-rsvp-button"
+                            id="phase8RsvpButton">
+
+                        <span>
+                            Submit RSVP
+                        </span>
+
+                        <span class="phase8-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                <!--CENTER MESSAGE -->
+
+                <div class="phase8-center">
+
+                    <div class="phase8-center-inner">
+
+                        <h2>
+                            Come join us
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <!--BOTTOM LEFT-->
+
+                <div class="phase8-copyright">
+
+                    Copyright © WeddingDay
+
+                </div>
+
+
+                <!-- BOTTOM RIGHT -->
+
+                <div class="phase8-created">
+
+                    Created by Adheeb
+
+                </div>
+
+
+                <!-- RSVP MODAL-->
+
+                <div class="phase8-modal"
+                     id="phase8Modal"
+                     aria-hidden="true">
+
+                    <div class="phase8-modal-backdrop"></div>
+
+
+                    <div class="phase8-modal-card">
+
+                        <button type="button"
+                                class="phase8-modal-close"
+                                id="phase8ModalClose"
+                                aria-label="Close">
+                            ×
+                        </button>
+
+
+                        <div class="phase8-modal-eyebrow">
+                            WEDDING RSVP
+                        </div>
+
+
+                        <h3>
+                            We'd love<br>
+                            to celebrate with you.
+                        </h3>
+
+
+                        <p>
+                            Please confirm your attendance
+                            and join us for this special day.
+                        </p>
+
+
+                        <form class="phase8-rsvp-form"
+                              id="phase8RsvpForm">
+
+                            <input type="text"
+                                   name="name"
+                                   placeholder="Your name"
+                                   required>
+
+
+                            <select name="attendance"
+                                    required>
+
+                                <option value="">
+                                    Will you attend?
+                                </option>
+
+                                <option value="yes">
+                                    Yes, I'll be there
+                                </option>
+
+                                <option value="no">
+                                    Sorry, I can't make it
+                                </option>
+
+                            </select>
+
+
+                            <button type="submit">
+                                Confirm RSVP
+                                <span>→</span>
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <script>
+
+        function initIntroVideo() {
+
+            const intro =
+                document.getElementById("intro-video");
+
+            const video =
+                document.getElementById("introVideo");
+
+            const startButton =
+                document.getElementById("startIntro");
+
+            const music =
+                document.getElementById("weddingMusic");
+
+
+            if (!intro || !video || !startButton) {
+
+                console.warn(
+                    "Intro video elements not found."
+                );
+
+                return;
+            }
+
+
+            let introFinished = false;
+
+
+             
+            // LOCK SCROLL
+            document.documentElement.classList.add(
+                "intro-active"
+            );
+
+            document.body.classList.add(
+                "intro-active"
+            );
+
+
+             
+            // START INTRO VIDEO
+            function startVideo() {
+
+                if (introFinished) {
+                    return;
+                }
+
+
+                // Video ka original audio ON
+                video.muted = false;
+                video.volume = 1;
+
+                video.currentTime = 0;
+
+
+                video.play()
+                    .then(() => {
+
+                        console.log(
+                            "Intro video started with original audio."
+                        );
+
+
+                        startButton.classList.add(
+                            "intro-button-hidden"
+                        );
+
+                    })
+                    .catch((error) => {
+
+                        console.error(
+                            "Unable to start intro video:",
+                            error
+                        );
+
+                    });
+
+            }
+
+
+             
+            // USER CLICK
+            startButton.addEventListener(
+                "click",
+                startVideo
+            );
+
+
+             
+            // VIDEO END
+            video.addEventListener(
+                "ended",
+                function () {
+
+                    console.log(
+                        "Intro video finished."
+                    );
+
+
+                    // First close intro
+                    closeIntro();
+
+
+                  
+                    // START WEDDING MUSIC
+          
+                    if (music) {
+
+                        music.currentTime = 0;
+
+                        music.volume = 1;
+
+                        music.play()
+                            .then(() => {
+
+                                console.log(
+                                    "Wedding music started."
+                                );
+
+                            })
+                            .catch((error) => {
+
+                                console.error(
+                                    "Unable to start wedding music:",
+                                    error
+                                );
+
+                            });
+
+                    }
+
+                }
+            );
+
+
+            
+            // Close Intro
+            function closeIntro() {
+
+                if (introFinished) {
+                    return;
+                }
+
+                introFinished = true;
+
+
+                // Stop intro video
+                video.pause();
+
+
+                // Unlock scrolling
+                document.documentElement.classList.remove(
+                    "intro-active"
+                );
+
+                document.body.classList.remove(
+                    "intro-active"
+                );
+
+
+                // Fade intro
+                intro.classList.add(
+                    "intro-hidden"
+                );
+
+
+                // Remove splash
+                setTimeout(
+                    function () {
+
+                        if (
+                            intro &&
+                            intro.parentNode
+                        ) {
+
+                            intro.remove();
+
+                        }
+
+                    },
+                    1200
+                );
+
+            }
+
+            video.addEventListener(
+                "error",
+                function () {
+
+                    console.error(
+                        "Intro video failed to load."
+                    );
+
+                }
+            );
+
+        }
+
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                initIntroVideo();
+
+            }
+        );
+    </script>
+    <script src="js/phase1.js"></script>
+    <script src="js/phase2.js"></script>
+    <script src="js/phase3.js"></script>
+    <script src="js/phase4.js"></script>
+    <script src="js/phase5.js"></script>
+    <script src="js/phase6.js"></script>
+    <script src="js/phase7.js"></script>
+    <script src="js/phase8.js"></script>
+    <script src="index.js"></script>
+
+
+</body>
+
+</html>
